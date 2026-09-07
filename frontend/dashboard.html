@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SIH26006</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SIH26006</h2>
+                <p class="platform-name">Freight Intelligence</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link active" data-icon="📊">
+                    <span>Dashboard</span>
+                </a>
+                <a href="forecast.html" class="nav-link" data-icon="📈">
+                    <span>Forecast</span>
+                </a>
+                <a href="vessels.html" class="nav-link" data-icon="🚢">
+                    <span>Vessels</span>
+                </a>
+                <a href="ports.html" class="nav-link" data-icon="⛴️">
+                    <span>Ports</span>
+                </a>
+                <a href="recommendations.html" class="nav-link" data-icon="💡">
+                    <span>Recommendations</span>
+                </a>
+                <a href="alerts.html" class="nav-link" data-icon="⚠️">
+                    <span>Alerts</span>
+                </a>
+                <a href="analytics.html" class="nav-link" data-icon="📉">
+                    <span>Analytics</span>
+                </a>
+                <a href="about.html" class="nav-link" data-icon="ℹ️">
+                    <span>About</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Freight Intelligence Dashboard</h1>
+                    <p class="header-subtitle">Real-time freight forecasting & vessel optimization</p>
+                </div>
+                <div class="header-right">
+                    <span class="user-info">User: <strong id="username"></strong></span>
+                    <button class="btn-demo-run" onclick="runDemo()">Run Demo</button>
+                </div>
+            </header>
+
+            <!-- Main Dashboard Content -->
+            <div class="dashboard-content">
+
+                <!-- Summary Cards -->
+                <section class="summary-cards">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3>Current Freight Rate</h3>
+                            <span class="card-icon">₹</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-value" id="currentFreight">₹ 85,450</div>
+                            <div class="card-subtitle">Australia → Paradip (Coal)</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="trend trend-up">↑ +2.3% from yesterday</span>
+                        </div>
+                    </div>
+
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3>Forecast Freight Rate</h3>
+                            <span class="card-icon">📈</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-value" id="forecastFreight">₹ 88,920</div>
+                            <div class="card-subtitle">30-day forecast</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="trend trend-up">Increasing trend</span>
+                        </div>
+                    </div>
+
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3>Recommended Vessel</h3>
+                            <span class="card-icon">🚢</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-value" id="recommendedVessel">Panamax</div>
+                            <div class="card-subtitle">Capacity: 65,000 TEU</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-success">Suitable</span>
+                        </div>
+                    </div>
+
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3>Overall Risk Level</h3>
+                            <span class="card-icon">⚠️</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-value" id="riskLevel">MEDIUM</div>
+                            <div class="card-subtitle">Risk Score: 52/100</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-warning">Monitor</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Current Route Information -->
+                <section class="route-info">
+                    <div class="section-title">
+                        <h2>Current Route Analysis</h2>
+                    </div>
+                    <div class="route-details">
+                        <div class="route-item">
+                            <label>Origin:</label>
+                            <span id="routeOrigin">Australia</span>
+                        </div>
+                        <div class="route-item">
+                            <label>Destination:</label>
+                            <span id="routeDestination">Paradip</span>
+                        </div>
+                        <div class="route-item">
+                            <label>Cargo Type:</label>
+                            <span id="cargotype">Coal</span>
+                        </div>
+                        <div class="route-item">
+                            <label>Cargo Quantity:</label>
+                            <span id="cargoQuantity">70,000 tonnes</span>
+                        </div>
+                        <div class="route-item">
+                            <label>Contract Duration:</label>
+                            <span id="contractDuration">3 Months</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Row 1 -->
+                <div class="charts-row">
+                    <!-- Historical Freight Rate Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Historical Freight Rate (Last 12 Months)</h3>
+                        </div>
+                        <canvas id="historicalChart"></canvas>
+                    </div>
+
+                    <!-- Forecast Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Freight Rate Forecast</h3>
+                        </div>
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="charts-row">
+                    <!-- Vessel Comparison Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Vessel Type Compatibility</h3>
+                        </div>
+                        <canvas id="vesselChart"></canvas>
+                    </div>
+
+                    <!-- Risk Indicators Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Risk Indicators</h3>
+                        </div>
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Vessel Compatibility Details -->
+                <section class="compatibility-section">
+                    <div class="section-title">
+                        <h2>Vessel Compatibility Analysis</h2>
+                    </div>
+                    <div class="compatibility-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Vessel Type</th>
+                                    <th>Capacity (tonnes)</th>
+                                    <th>Draft (m)</th>
+                                    <th>Port Suitable</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vesselCompTable">
+                                <tr>
+                                    <td>Handysize</td>
+                                    <td>35,000</td>
+                                    <td>9.2</td>
+                                    <td>✓</td>
+                                    <td><span class="badge badge-danger">Not Suitable</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Supramax</td>
+                                    <td>52,000</td>
+                                    <td>10.5</td>
+                                    <td>✓</td>
+                                    <td><span class="badge badge-warning">Warning</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Panamax</td>
+                                    <td>65,000</td>
+                                    <td>11.8</td>
+                                    <td>✓</td>
+                                    <td><span class="badge badge-success">Suitable</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Capesize</td>
+                                    <td>170,000</td>
+                                    <td>15.5</td>
+                                    <td>✗</td>
+                                    <td><span class="badge badge-danger">Not Suitable</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Port Compatibility -->
+                <section class="port-compatibility">
+                    <div class="section-title">
+                        <h2>Port Compatibility (Paradip)</h2>
+                    </div>
+                    <div class="compatibility-checks">
+                        <div class="check-item check-pass">
+                            <span class="check-icon">✓</span>
+                            <span class="check-label">Draft</span>
+                            <span class="check-value">11.8m ≤ 12.5m (Max)</span>
+                        </div>
+                        <div class="check-item check-pass">
+                            <span class="check-icon">✓</span>
+                            <span class="check-label">LOA (Length Overall)</span>
+                            <span class="check-value">229m ≤ 250m (Max)</span>
+                        </div>
+                        <div class="check-item check-pass">
+                            <span class="check-icon">✓</span>
+                            <span class="check-label">Beam (Width)</span>
+                            <span class="check-value">32m ≤ 35m (Max)</span>
+                        </div>
+                        <div class="check-item check-pass">
+                            <span class="check-icon">✓</span>
+                            <span class="check-label">Cargo Handling</span>
+                            <span class="check-value">Good - 70,000 tonnes capacity available</span>
+                        </div>
+                        <div class="overall-status">
+                            <h4>Overall Status: <span class="status-suitable">SUITABLE</span></h4>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Risk Analysis -->
+                <section class="risk-analysis">
+                    <div class="section-title">
+                        <h2>Detailed Risk Analysis</h2>
+                    </div>
+                    <div class="risk-factors">
+                        <div class="risk-factor">
+                            <div class="factor-header">
+                                <h4>Freight Volatility</h4>
+                                <span class="factor-score">Medium</span>
+                            </div>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 50%;"></div>
+                            </div>
+                            <p>Moderate price fluctuations observed in the past 30 days.</p>
+                        </div>
+
+                        <div class="risk-factor">
+                            <div class="factor-header">
+                                <h4>Port Congestion</h4>
+                                <span class="factor-score">Low</span>
+                            </div>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 25%;"></div>
+                            </div>
+                            <p>Paradip port operates at 65% capacity. Good turnaround expected.</p>
+                        </div>
+
+                        <div class="risk-factor">
+                            <div class="factor-header">
+                                <h4>Demand Uncertainty</h4>
+                                <span class="factor-score">Medium</span>
+                            </div>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 55%;"></div>
+                            </div>
+                            <p>Industrial demand shows seasonal patterns. Monitor commodity prices.</p>
+                        </div>
+
+                        <div class="risk-factor">
+                            <div class="factor-header">
+                                <h4>Vessel Compatibility</h4>
+                                <span class="factor-score">Low</span>
+                            </div>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 20%;"></div>
+                            </div>
+                            <p>Panamax vessels are well-suited for Paradip routes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recommendation -->
+                <section class="recommendation-section">
+                    <div class="section-title">
+                        <h2>Chartering Recommendation</h2>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <h3>Recommended Strategy</h3>
+                            <span class="rec-icon">💡</span>
+                        </div>
+                        <div class="rec-content">
+                            <p>
+                                <strong>Route:</strong> Australia → Paradip (Coal)<br>
+                                <strong>Recommended Vessel:</strong> Panamax (65,000 tonnes)<br>
+                                <strong>Cargo Quantity:</strong> 70,000 tonnes<br>
+                                <strong>Port Compatibility:</strong> Fully Suitable<br>
+                                <strong>Risk Level:</strong> Medium<br>
+                                <br>
+                                <strong>Strategy:</strong> Evaluate a short-term charter (3 months) based on the 
+                                forecasted moderate freight rate increase. Current market conditions are favorable, 
+                                with low port congestion and good vessel availability. Monitor freight volatility 
+                                closely over the next 2 weeks for optimal market entry.
+                            </p>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn-primary" onclick="goToForecast()">Generate New Forecast</button>
+                            <button class="btn-secondary" onclick="goToRecommendations()">View More Recommendations</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Data Disclaimer -->
+            <footer class="data-disclaimer">
+                <p>⚠️ <em>Prototype uses sample/demo data for demonstration. Production deployment requires validated historical freight, port infrastructure, congestion, commodity and market data.</em></p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

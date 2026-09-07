@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - SIH26006</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SIH26006</h2>
+                <p class="platform-name">Freight Intelligence</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link" data-icon="📊">
+                    <span>Dashboard</span>
+                </a>
+                <a href="forecast.html" class="nav-link" data-icon="📈">
+                    <span>Forecast</span>
+                </a>
+                <a href="vessels.html" class="nav-link" data-icon="🚢">
+                    <span>Vessels</span>
+                </a>
+                <a href="ports.html" class="nav-link" data-icon="⛴️">
+                    <span>Ports</span>
+                </a>
+                <a href="recommendations.html" class="nav-link" data-icon="💡">
+                    <span>Recommendations</span>
+                </a>
+                <a href="alerts.html" class="nav-link active" data-icon="⚠️">
+                    <span>Alerts</span>
+                </a>
+                <a href="analytics.html" class="nav-link" data-icon="📉">
+                    <span>Analytics</span>
+                </a>
+                <a href="about.html" class="nav-link" data-icon="ℹ️">
+                    <span>About</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Alerts & Notifications</h1>
+                    <p class="header-subtitle">Monitor market and operational risks</p>
+                </div>
+            </header>
+
+            <!-- Alerts Content -->
+            <div class="dashboard-content">
+
+                <!-- Alert Statistics -->
+                <section class="alert-statistics">
+                    <div class="alert-stat-card alert-high">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">High Priority Alerts</div>
+                    </div>
+                    <div class="alert-stat-card alert-medium">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Medium Priority Alerts</div>
+                    </div>
+                    <div class="alert-stat-card alert-low">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Low Priority Alerts</div>
+                    </div>
+                </section>
+
+                <!-- Active Alerts -->
+                <section class="active-alerts">
+                    <div class="section-title">
+                        <h2>Active Alerts</h2>
+                    </div>
+
+                    <!-- High Priority Alerts -->
+                    <div class="alert-group">
+                        <h3 class="alert-group-title alert-group-high">
+                            🔴 High Priority
+                        </h3>
+
+                        <div class="alert-item alert-item-high">
+                            <div class="alert-icon">⚠️</div>
+                            <div class="alert-content">
+                                <h4>Freight Volatility Alert</h4>
+                                <p>Freight rates for coal routes have exceeded historical volatility thresholds by 18%.</p>
+                                <p class="alert-time">Triggered: 2 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-high">
+                            <div class="alert-icon">⚠️</div>
+                            <div class="alert-content">
+                                <h4>Vessel Port Compatibility Issue</h4>
+                                <p>Capesize vessel exceeds draft limitation for Haldia port by 5 meters. Route not recommended.</p>
+                                <p class="alert-time">Triggered: 4 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-high">
+                            <div class="alert-icon">⚠️</div>
+                            <div class="alert-content">
+                                <h4>Port Congestion Alert</h4>
+                                <p>Visakhapatnam port congestion has reached 85%. Vessel turnaround time extended by 3-5 days.</p>
+                                <p class="alert-time">Triggered: 6 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medium Priority Alerts -->
+                    <div class="alert-group">
+                        <h3 class="alert-group-title alert-group-medium">
+                            🟡 Medium Priority
+                        </h3>
+
+                        <div class="alert-item alert-item-medium">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <h4>Market Trend Update</h4>
+                                <p>Freight rates showing slight upward trend. Favorable conditions for chartering decisions.</p>
+                                <p class="alert-time">Triggered: 8 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-medium">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <h4>Demand Uncertainty Alert</h4>
+                                <p>Industrial demand indicators show seasonal decline. Monitor cargo volumes closely.</p>
+                                <p class="alert-time">Triggered: 12 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-medium">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <h4>Vessel Availability Update</h4>
+                                <p>Supramax vessel availability in region at 65%. Consider advance booking for preferred vessels.</p>
+                                <p class="alert-time">Triggered: 18 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-medium">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <h4>Weather Alert</h4>
+                                <p>Monsoon season approaching. Expected 8% increase in transit times on Indian coast routes.</p>
+                                <p class="alert-time">Triggered: 1 day ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-medium">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <h4>Fuel Price Update</h4>
+                                <p>Marine fuel (HFO) prices increased by 2.5%. Factor into operational cost calculations.</p>
+                                <p class="alert-time">Triggered: 1 day ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Low Priority Alerts -->
+                    <div class="alert-group">
+                        <h3 class="alert-group-title alert-group-low">
+                            🟢 Low Priority
+                        </h3>
+
+                        <div class="alert-item alert-item-low">
+                            <div class="alert-icon">📊</div>
+                            <div class="alert-content">
+                                <h4>System Update</h4>
+                                <p>Forecast data has been updated with latest 24-hour market information.</p>
+                                <p class="alert-time">Triggered: 2 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item alert-item-low">
+                            <div class="alert-icon">📊</div>
+                            <div class="alert-content">
+                                <h4>Data Sync Complete</h4>
+                                <p>Port and vessel databases synchronized successfully with latest infrastructure changes.</p>
+                                <p class="alert-time">Triggered: 6 hours ago</p>
+                            </div>
+                            <div class="alert-action">
+                                <button class="btn-small" onclick="dismissAlert(this)">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Alert History -->
+                <section class="alert-history">
+                    <div class="section-title">
+                        <h2>Alert History (Last 7 Days)</h2>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date/Time</th>
+                                    <th>Alert Type</th>
+                                    <th>Message</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2026-09-07 14:30</td>
+                                    <td>Freight Volatility</td>
+                                    <td>Coal route volatility exceeds threshold</td>
+                                    <td><span class="badge badge-danger">High</span></td>
+                                    <td><span class="status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2026-09-07 10:15</td>
+                                    <td>Market Trend</td>
+                                    <td>Upward freight trend detected</td>
+                                    <td><span class="badge badge-warning">Medium</span></td>
+                                    <td><span class="status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2026-09-06 16:45</td>
+                                    <td>Port Congestion</td>
+                                    <td>High congestion at Visakhapatnam</td>
+                                    <td><span class="badge badge-danger">High</span></td>
+                                    <td><span class="status-resolved">Resolved</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2026-09-05 09:20</td>
+                                    <td>Weather Alert</td>
+                                    <td>Monsoon season approaching</td>
+                                    <td><span class="badge badge-warning">Medium</span></td>
+                                    <td><span class="status-active">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Data Disclaimer -->
+            <footer class="data-disclaimer">
+                <p>⚠️ <em>Alerts are generated from sample/demo data for prototype demonstration. Real alerts require live market, port, and vessel data feeds.</em></p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/alerts.js"></script>
+    <script>
+        function dismissAlert(button) {
+            const alertItem = button.closest('.alert-item');
+            alertItem.style.opacity = '0.5';
+            button.textContent = 'Dismissed';
+            button.disabled = true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SIH26006</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SIH26006</h2>
+                <p class="platform-name">Freight Intelligence</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link" data-icon="📊">
+                    <span>Dashboard</span>
+                </a>
+                <a href="forecast.html" class="nav-link" data-icon="📈">
+                    <span>Forecast</span>
+                </a>
+                <a href="vessels.html" class="nav-link" data-icon="🚢">
+                    <span>Vessels</span>
+                </a>
+                <a href="ports.html" class="nav-link" data-icon="⛴️">
+                    <span>Ports</span>
+                </a>
+                <a href="recommendations.html" class="nav-link" data-icon="💡">
+                    <span>Recommendations</span>
+                </a>
+                <a href="alerts.html" class="nav-link" data-icon="⚠️">
+                    <span>Alerts</span>
+                </a>
+                <a href="analytics.html" class="nav-link active" data-icon="📉">
+                    <span>Analytics</span>
+                </a>
+                <a href="about.html" class="nav-link" data-icon="ℹ️">
+                    <span>About</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Analytics & Reports</h1>
+                    <p class="header-subtitle">Market trends and performance insights</p>
+                </div>
+            </header>
+
+            <!-- Analytics Content -->
+            <div class="dashboard-content">
+
+                <!-- Key Metrics -->
+                <section class="key-metrics">
+                    <div class="section-title">
+                        <h2>Key Performance Metrics</h2>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h4>Forecast Accuracy</h4>
+                            <div class="metric-value">87%</div>
+                            <p class="metric-desc">30-day forecast accuracy rate</p>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Average Recommendation</h4>
+                            <div class="metric-value">94%</div>
+                            <p class="metric-desc">Optimal vessel selection rate</p>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Cost Savings</h4>
+                            <div class="metric-value">₹ 2.3L</div>
+                            <p class="metric-desc">Average per voyage optimization</p>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Port Utilization</h4>
+                            <div class="metric-value">78%</div>
+                            <p class="metric-desc">Efficient resource allocation</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics Charts -->
+                <div class="charts-row">
+                    <!-- Route Performance Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Route Performance (Last 6 Months)</h3>
+                        </div>
+                        <canvas id="routePerformanceChart"></canvas>
+                    </div>
+
+                    <!-- Vessel Type Utilization -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Vessel Type Utilization</h3>
+                        </div>
+                        <canvas id="vesselUtilizationChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Port Analytics -->
+                <div class="charts-row">
+                    <!-- Port Congestion Trend -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Port Congestion Trends</h3>
+                        </div>
+                        <canvas id="portCongestionChart"></canvas>
+                    </div>
+
+                    <!-- Freight Market Index -->
+                    <div class="chart-container">
+                        <div class="chart-title">
+                            <h3>Freight Market Index</h3>
+                        </div>
+                        <canvas id="freightIndexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Route Statistics Table -->
+                <section class="route-statistics">
+                    <div class="section-title">
+                        <h2>Route Statistics</h2>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Route</th>
+                                    <th>Voyages (6M)</th>
+                                    <th>Avg Freight Rate</th>
+                                    <th>Avg Turnaround (days)</th>
+                                    <th>Cost Efficiency</th>
+                                    <th>Risk Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Australia → Paradip (Coal)</td>
+                                    <td>12</td>
+                                    <td>₹ 85,450</td>
+                                    <td>18</td>
+                                    <td><span class="badge badge-success">Excellent</span></td>
+                                    <td><span class="badge badge-warning">Medium</span></td>
+                                </tr>
+                                <tr>
+                                    <td>USA → Visakhapatnam (Iron Ore)</td>
+                                    <td>8</td>
+                                    <td>₹ 92,300</td>
+                                    <td>22</td>
+                                    <td><span class="badge badge-success">Good</span></td>
+                                    <td><span class="badge badge-success">Low</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Indonesia → Gopalpur (Grain)</td>
+                                    <td>6</td>
+                                    <td>₹ 72,100</td>
+                                    <td>12</td>
+                                    <td><span class="badge badge-warning">Fair</span></td>
+                                    <td><span class="badge badge-warning">Medium</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Russia → Haldia (Breakbulk)</td>
+                                    <td>4</td>
+                                    <td>₹ 78,500</td>
+                                    <td>25</td>
+                                    <td><span class="badge badge-success">Good</span></td>
+                                    <td><span class="badge badge-danger">High</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Vessel Comparison -->
+                <section class="vessel-comparison">
+                    <div class="section-title">
+                        <h2>Vessel Type Comparison</h2>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Vessel Type</th>
+                                    <th>Average Day Rate</th>
+                                    <th>Utilization Rate</th>
+                                    <th>Avg Load Factor</th>
+                                    <th>On-time Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Handysize</strong></td>
+                                    <td>₹ 18,500</td>
+                                    <td>82%</td>
+                                    <td>88%</td>
+                                    <td>91%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Supramax</strong></td>
+                                    <td>₹ 22,100</td>
+                                    <td>85%</td>
+                                    <td>92%</td>
+                                    <td>94%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Panamax</strong></td>
+                                    <td>₹ 25,300</td>
+                                    <td>88%</td>
+                                    <td>95%</td>
+                                    <td>96%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Capesize</strong></td>
+                                    <td>₹ 34,200</td>
+                                    <td>79%</td>
+                                    <td>97%</td>
+                                    <td>93%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Data Disclaimer -->
+            <footer class="data-disclaimer">
+                <p>⚠️ <em>Analytics are based on sample/demo data for prototype demonstration. Real analytics require aggregated production data and verified market information.</em></p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>

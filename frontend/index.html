@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH26006 - Freight Intelligence Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <h1>SIH26006</h1>
+                <p class="subtitle">Freight Intelligence Platform</p>
+            </div>
+            
+            <div class="project-info">
+                <h2>Intelligent Freight Forecasting & Vessel Chartering</h2>
+                <p>
+                    A comprehensive decision-support platform for optimized vessel chartering 
+                    and bulk cargo procurement from overseas to the East Coast of India.
+                </p>
+            </div>
+
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Login</button>
+                <button type="button" class="btn-demo" onclick="demoLogin()">Demo Access</button>
+            </form>
+
+            <div class="demo-note">
+                <p><strong>Demo Credentials:</strong> User: demo | Password: demo123</p>
+            </div>
+
+            <div class="features">
+                <h3>Key Features:</h3>
+                <ul>
+                    <li>📊 Freight Rate Forecasting</li>
+                    <li>🚢 Vessel Optimization & Compatibility</li>
+                    <li>⛴️ Port Infrastructure Analysis</li>
+                    <li>⚠️ Risk Assessment</li>
+                    <li>💡 Intelligent Chartering Recommendations</li>
+                </ul>
+            </div>
+
+            <footer class="login-footer">
+                <p><em>Prototype uses sample/demo data for demonstration. Production deployment requires validated historical freight, port infrastructure, and market data.</em></p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'demo' && password === 'demo123') {
+                sessionStorage.setItem('user', username);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid credentials. Try: demo / demo123');
+            }
+        }
+
+        function demoLogin() {
+            sessionStorage.setItem('user', 'demo');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

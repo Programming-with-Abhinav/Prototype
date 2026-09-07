@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ports - SIH26006</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SIH26006</h2>
+                <p class="platform-name">Freight Intelligence</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link" data-icon="📊">
+                    <span>Dashboard</span>
+                </a>
+                <a href="forecast.html" class="nav-link" data-icon="📈">
+                    <span>Forecast</span>
+                </a>
+                <a href="vessels.html" class="nav-link" data-icon="🚢">
+                    <span>Vessels</span>
+                </a>
+                <a href="ports.html" class="nav-link active" data-icon="⛴️">
+                    <span>Ports</span>
+                </a>
+                <a href="recommendations.html" class="nav-link" data-icon="💡">
+                    <span>Recommendations</span>
+                </a>
+                <a href="alerts.html" class="nav-link" data-icon="⚠️">
+                    <span>Alerts</span>
+                </a>
+                <a href="analytics.html" class="nav-link" data-icon="📉">
+                    <span>Analytics</span>
+                </a>
+                <a href="about.html" class="nav-link" data-icon="ℹ️">
+                    <span>About</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>East Coast Ports</h1>
+                    <p class="header-subtitle">Infrastructure and compatibility information</p>
+                </div>
+            </header>
+
+            <!-- Ports Content -->
+            <div class="dashboard-content">
+
+                <!-- Port Overview Cards -->
+                <section class="ports-overview">
+                    <div class="section-title">
+                        <h2>Major Destination Ports</h2>
+                    </div>
+
+                    <div class="port-cards-grid">
+                        <!-- Paradip -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Paradip</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">12.5 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">250 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">35 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">65%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">Major coal handling port with modern infrastructure.</p>
+                        </div>
+
+                        <!-- Visakhapatnam -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Visakhapatnam</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">13.5 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">275 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">38 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">72%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">Multi-purpose port with container and bulk facilities.</p>
+                        </div>
+
+                        <!-- Gangavaram -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Gangavaram</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">14.0 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">280 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">40 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">55%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">Deep-water port with excellent vessel access.</p>
+                        </div>
+
+                        <!-- Gopalpur -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Gopalpur</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">12.0 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">230 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">32 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">48%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">Smaller port suitable for Panamax and below vessels.</p>
+                        </div>
+
+                        <!-- Dhamra -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Dhamra</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">13.0 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">260 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">37 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">58%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">Modern port with bulk and container capabilities.</p>
+                        </div>
+
+                        <!-- Haldia -->
+                        <div class="port-card">
+                            <div class="port-header">
+                                <h3>Haldia</h3>
+                                <span class="port-status">Operational</span>
+                            </div>
+                            <div class="port-specs">
+                                <div class="spec">
+                                    <span class="spec-label">Max Draft:</span>
+                                    <span class="spec-value">10.5 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max LOA:</span>
+                                    <span class="spec-value">210 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Max Beam:</span>
+                                    <span class="spec-value">30 m</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-label">Congestion:</span>
+                                    <span class="spec-value">70%</span>
+                                </div>
+                            </div>
+                            <p class="port-desc">River port suitable for smaller bulk vessels.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Port Infrastructure Table -->
+                <section class="port-infrastructure">
+                    <div class="section-title">
+                        <h2>Port Infrastructure Details</h2>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="infrastructure-table">
+                            <thead>
+                                <tr>
+                                    <th>Port</th>
+                                    <th>Max Draft (m)</th>
+                                    <th>Max LOA (m)</th>
+                                    <th>Max Beam (m)</th>
+                                    <th>Handling Capacity (tonnes/year)</th>
+                                    <th>Congestion Status</th>
+                                    <th>Cargo Types</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Paradip</strong></td>
+                                    <td>12.5</td>
+                                    <td>250</td>
+                                    <td>35</td>
+                                    <td>120M</td>
+                                    <td><span class="badge badge-warning">Moderate (65%)</span></td>
+                                    <td>Coal, Ore, General</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Visakhapatnam</strong></td>
+                                    <td>13.5</td>
+                                    <td>275</td>
+                                    <td>38</td>
+                                    <td>95M</td>
+                                    <td><span class="badge badge-warning">High (72%)</span></td>
+                                    <td>Container, Bulk, General</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gangavaram</strong></td>
+                                    <td>14.0</td>
+                                    <td>280</td>
+                                    <td>40</td>
+                                    <td>100M</td>
+                                    <td><span class="badge badge-success">Low (55%)</span></td>
+                                    <td>Bulk, General</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gopalpur</strong></td>
+                                    <td>12.0</td>
+                                    <td>230</td>
+                                    <td>32</td>
+                                    <td>50M</td>
+                                    <td><span class="badge badge-success">Low (48%)</span></td>
+                                    <td>Bulk, Breakbulk</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dhamra</strong></td>
+                                    <td>13.0</td>
+                                    <td>260</td>
+                                    <td>37</td>
+                                    <td>80M</td>
+                                    <td><span class="badge badge-success">Moderate (58%)</span></td>
+                                    <td>Bulk, Container, General</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Haldia</strong></td>
+                                    <td>10.5</td>
+                                    <td>210</td>
+                                    <td>30</td>
+                                    <td>45M</td>
+                                    <td><span class="badge badge-warning">High (70%)</span></td>
+                                    <td>General, Breakbulk</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="table-note"><em>Infrastructure data is sample/demo data for prototype demonstration purposes.</em></p>
+                </section>
+
+            </div>
+
+            <!-- Data Disclaimer -->
+            <footer class="data-disclaimer">
+                <p>⚠️ <em>Port specifications and congestion data are sample values for prototype demonstration. Real data requires verified port authority information.</em></p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/ports.js"></script>
+</body>
+</html>
