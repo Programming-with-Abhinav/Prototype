@@ -10,3 +10,4 @@ backend/src/main/java/in/sih26006/freight/service/oracleJdk-26/
 *.log
 .DS_Store
 backend/oracleJdk-26/
+backend/oracleJdk-26/
