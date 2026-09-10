@@ -1,268 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommendations - SIH26006</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>SIH26006</h2>
-                <p class="platform-name">Freight Intelligence</p>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-link" data-icon="📊">
-                    <span>Dashboard</span>
-                </a>
-                <a href="forecast.html" class="nav-link" data-icon="📈">
-                    <span>Forecast</span>
-                </a>
-                <a href="vessels.html" class="nav-link" data-icon="🚢">
-                    <span>Vessels</span>
-                </a>
-                <a href="ports.html" class="nav-link" data-icon="⛴️">
-                    <span>Ports</span>
-                </a>
-                <a href="recommendations.html" class="nav-link active" data-icon="💡">
-                    <span>Recommendations</span>
-                </a>
-                <a href="alerts.html" class="nav-link" data-icon="⚠️">
-                    <span>Alerts</span>
-                </a>
-                <a href="analytics.html" class="nav-link" data-icon="📉">
-                    <span>Analytics</span>
-                </a>
-                <a href="about.html" class="nav-link" data-icon="ℹ️">
-                    <span>About</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <button class="btn-logout" onclick="logout()">Logout</button>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Header -->
-            <header class="top-header">
-                <div class="header-left">
-                    <h1>Chartering Recommendations</h1>
-                    <p class="header-subtitle">Intelligent decisions based on analysis</p>
-                </div>
-            </header>
-
-            <!-- Recommendations Content -->
-            <div class="dashboard-content">
-
-                <!-- Active Recommendations -->
-                <section class="active-recommendations">
-                    <div class="section-title">
-                        <h2>Active Recommendations</h2>
-                    </div>
-
-                    <!-- Recommendation Card 1 -->
-                    <div class="recommendation-card recommendation-primary">
-                        <div class="rec-header">
-                            <h3>Australia → Paradip (Coal)</h3>
-                            <span class="rec-icon">💡</span>
-                        </div>
-                        <div class="rec-content">
-                            <div class="rec-row">
-                                <div class="rec-item">
-                                    <label>Route:</label>
-                                    <span>Australia → Paradip</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Cargo:</label>
-                                    <span>Coal, 70,000 tonnes</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Recommended Vessel:</label>
-                                    <span><strong>Panamax</strong></span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Risk Level:</label>
-                                    <span><span class="badge badge-warning">Medium</span></span>
-                                </div>
-                            </div>
-
-                            <div class="rec-analysis">
-                                <h4>Analysis & Rationale:</h4>
-                                <ul>
-                                    <li>Panamax vessel capacity (65,000 tonnes) is optimal for the 70,000 tonne cargo requiring minimal additional equipment.</li>
-                                    <li>Freight forecast shows moderate 4.1% increase over 30-day period, indicating favorable market entry timing.</li>
-                                    <li>Port compatibility: Draft, LOA, and beam all pass. Paradip operates at 65% capacity (good turnaround time).</li>
-                                    <li>Risk factors are balanced: medium freight volatility is offset by low port congestion and good vessel compatibility.</li>
-                                </ul>
-                            </div>
-
-                            <div class="rec-strategy">
-                                <h4>Recommended Strategy:</h4>
-                                <p>
-                                    Evaluate a <strong>short-term/medium-term charter</strong> (3-6 months) entry during the favorable forecast window. 
-                                    Current market conditions support chartering action. Consider executing the charter within the next 2 weeks 
-                                    before freight volatility potentially increases.
-                                </p>
-                            </div>
-
-                            <div class="rec-actions">
-                                <button class="btn-primary" onclick="goToForecast()">Update Forecast</button>
-                                <button class="btn-secondary" onclick="alert('Recommendation saved')">Save Recommendation</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recommendation Card 2 -->
-                    <div class="recommendation-card recommendation-secondary">
-                        <div class="rec-header">
-                            <h3>USA → Visakhapatnam (Iron Ore)</h3>
-                            <span class="rec-icon">💡</span>
-                        </div>
-                        <div class="rec-content">
-                            <div class="rec-row">
-                                <div class="rec-item">
-                                    <label>Route:</label>
-                                    <span>USA → Visakhapatnam</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Cargo:</label>
-                                    <span>Iron Ore, 90,000 tonnes</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Recommended Vessel:</label>
-                                    <span><strong>Capesize</strong></span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Risk Level:</label>
-                                    <span><span class="badge badge-success">Low</span></span>
-                                </div>
-                            </div>
-
-                            <div class="rec-analysis">
-                                <h4>Analysis & Rationale:</h4>
-                                <ul>
-                                    <li>Capesize is the optimal choice for 90,000 tonne volume, providing economy of scale.</li>
-                                    <li>Freight forecast indicates stable prices with low volatility.</li>
-                                    <li>Visakhapatnam can accommodate Capesize with slight margin (13.5m draft available).</li>
-                                    <li>Strong demand for iron ore supports stable contract terms.</li>
-                                </ul>
-                            </div>
-
-                            <div class="rec-strategy">
-                                <h4>Recommended Strategy:</h4>
-                                <p>
-                                    <strong>Medium-term contract (6-12 months)</strong> for better rate stability. 
-                                    Iron ore market fundamentals are supportive. Recommend locking in rates for multiple voyages.
-                                </p>
-                            </div>
-
-                            <div class="rec-actions">
-                                <button class="btn-primary" onclick="goToForecast()">Update Forecast</button>
-                                <button class="btn-secondary" onclick="alert('Recommendation saved')">Save Recommendation</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recommendation Card 3 -->
-                    <div class="recommendation-card recommendation-tertiary">
-                        <div class="rec-header">
-                            <h3>Indonesia → Gopalpur (Grain)</h3>
-                            <span class="rec-icon">⚠️</span>
-                        </div>
-                        <div class="rec-content">
-                            <div class="rec-row">
-                                <div class="rec-item">
-                                    <label>Route:</label>
-                                    <span>Indonesia → Gopalpur</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Cargo:</label>
-                                    <span>Grain, 45,000 tonnes</span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Recommended Vessel:</label>
-                                    <span><strong>Supramax</strong></span>
-                                </div>
-                                <div class="rec-item">
-                                    <label>Risk Level:</label>
-                                    <span><span class="badge badge-warning">Medium</span></span>
-                                </div>
-                            </div>
-
-                            <div class="rec-analysis">
-                                <h4>Analysis & Rationale:</h4>
-                                <ul>
-                                    <li>Supramax provides good capacity match for 45,000 tonnes grain cargo.</li>
-                                    <li>Freight market shows seasonal volatility for grain routes.</li>
-                                    <li>Gopalpur has lower congestion (48%), ensuring efficient operations.</li>
-                                    <li>Weather patterns should be monitored for this route.</li>
-                                </ul>
-                            </div>
-
-                            <div class="rec-strategy">
-                                <h4>Recommended Strategy:</h4>
-                                <p>
-                                    <strong>Cautious entry recommended</strong> with spot market monitoring before commitment. 
-                                    Consider <strong>short-term charter (1-3 months)</strong> until market conditions stabilize.
-                                </p>
-                            </div>
-
-                            <div class="rec-actions">
-                                <button class="btn-primary" onclick="goToForecast()">Update Forecast</button>
-                                <button class="btn-secondary" onclick="alert('Recommendation saved')">Save Recommendation</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-
-                <!-- Idle-Time Management -->
-                <section class="idle-management">
-                    <div class="section-title">
-                        <h2>Idle-Time Management</h2>
-                    </div>
-                    <div class="idle-scenarios">
-                        <div class="scenario-card">
-                            <h4>Scenario Analysis</h4>
-                            <div class="scenario-item">
-                                <label>Idle Risk:</label>
-                                <span class="badge badge-warning">Medium</span>
-                            </div>
-                            <div class="scenario-item">
-                                <label>Current Vessel Status:</label>
-                                <span>Post-discharge at Paradip</span>
-                            </div>
-                            <div class="potential-actions">
-                                <h5>Potential Actions:</h5>
-                                <ul>
-                                    <li>✓ Continue planned route to next loading port</li>
-                                    <li>✓ Consider ballast voyage to Indonesia for grain loading</li>
-                                    <li>✓ Evaluate vessel positioning for alternative routes</li>
-                                    <li>⚠️ Review charter extension terms with operator</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-
-            <!-- Data Disclaimer -->
-            <footer class="data-disclaimer">
-                <p>⚠️ <em>Recommendations are based on sample/demo data and prototype forecasting models. Production recommendations require validated real-time data and advanced ML models.</em></p>
-            </footer>
-        </main>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recommendation | SIH26006</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="simple-page">
+      <a class="brand" href="dashboard.html"
+        ><span class="brand-mark">↗</span><span>SIH<span>26006</span></span></a
+      ><a href="dashboard.html" class="back">← Dashboard</a>
+      <main class="content-wrap">
+        <p class="eyebrow">EXPLAINABLE RECOMMENDATION</p>
+        <h1>Charter a Panamax in the short term.</h1>
+        <p class="page-intro">
+          For Australia → Paradip · Coal · 70,000 tonnes · 3-month contract
+        </p>
+        <div class="reason-grid">
+          <article>
+            <span>01</span>
+            <h3>Freight signal</h3>
+            <p>
+              Demo forecast shows a moderate increase from ₹24,800 to ₹27,150.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Vessel fit</h3>
+            <p>
+              Panamax meets the cargo requirement with appropriate operating
+              headroom.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Port fit</h3>
+            <p>Draft, LOA, beam and sample handling checks pass at Paradip.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Risk balance</h3>
+            <p>
+              Overall score is 52/100: monitor volatility and demand
+              uncertainty.
+            </p>
+          </article>
+        </div>
+        <article class="strategy">
+          <span class="panel-kicker">SUGGESTED MARKET-ENTRY WINDOW</span>
+          <h2>Evaluate entering within the next 2–3 weeks.</h2>
+          <p>
+            This is a rule-based prototype recommendation, not real-world
+            financial or operational advice.
+          </p>
+        </article>
+      </main>
     </div>
-
-    <script src="js/api.js"></script>
     <script src="js/recommendations.js"></script>
-</body>
+  </body>
 </html>

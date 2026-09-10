@@ -1,261 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vessels - SIH26006</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>SIH26006</h2>
-                <p class="platform-name">Freight Intelligence</p>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-link" data-icon="📊">
-                    <span>Dashboard</span>
-                </a>
-                <a href="forecast.html" class="nav-link" data-icon="📈">
-                    <span>Forecast</span>
-                </a>
-                <a href="vessels.html" class="nav-link active" data-icon="🚢">
-                    <span>Vessels</span>
-                </a>
-                <a href="ports.html" class="nav-link" data-icon="⛴️">
-                    <span>Ports</span>
-                </a>
-                <a href="recommendations.html" class="nav-link" data-icon="💡">
-                    <span>Recommendations</span>
-                </a>
-                <a href="alerts.html" class="nav-link" data-icon="⚠️">
-                    <span>Alerts</span>
-                </a>
-                <a href="analytics.html" class="nav-link" data-icon="📉">
-                    <span>Analytics</span>
-                </a>
-                <a href="about.html" class="nav-link" data-icon="ℹ️">
-                    <span>About</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <button class="btn-logout" onclick="logout()">Logout</button>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Header -->
-            <header class="top-header">
-                <div class="header-left">
-                    <h1>Vessel Management</h1>
-                    <p class="header-subtitle">View and compare vessel types</p>
-                </div>
-            </header>
-
-            <!-- Vessel Content -->
-            <div class="dashboard-content">
-
-                <!-- Vessel Types Overview -->
-                <section class="vessels-overview">
-                    <div class="section-title">
-                        <h2>Supported Vessel Types</h2>
-                    </div>
-
-                    <div class="vessel-cards-grid">
-                        <!-- Handysize -->
-                        <div class="vessel-card">
-                            <div class="vessel-header">
-                                <h3>Handysize</h3>
-                                <span class="vessel-type-badge">Small</span>
-                            </div>
-                            <div class="vessel-specs">
-                                <div class="spec">
-                                    <span class="spec-label">Cargo Capacity:</span>
-                                    <span class="spec-value">35,000 tonnes</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Draft:</span>
-                                    <span class="spec-value">9.2 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">LOA (Length):</span>
-                                    <span class="spec-value">190 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Beam (Width):</span>
-                                    <span class="spec-value">28 m</span>
-                                </div>
-                            </div>
-                            <p class="vessel-desc">Flexible vessel suitable for smaller cargo volumes.</p>
-                        </div>
-
-                        <!-- Supramax -->
-                        <div class="vessel-card">
-                            <div class="vessel-header">
-                                <h3>Supramax</h3>
-                                <span class="vessel-type-badge">Medium</span>
-                            </div>
-                            <div class="vessel-specs">
-                                <div class="spec">
-                                    <span class="spec-label">Cargo Capacity:</span>
-                                    <span class="spec-value">52,000 tonnes</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Draft:</span>
-                                    <span class="spec-value">10.5 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">LOA (Length):</span>
-                                    <span class="spec-value">210 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Beam (Width):</span>
-                                    <span class="spec-value">30 m</span>
-                                </div>
-                            </div>
-                            <p class="vessel-desc">Balanced option for medium-sized shipments.</p>
-                        </div>
-
-                        <!-- Panamax -->
-                        <div class="vessel-card">
-                            <div class="vessel-header">
-                                <h3>Panamax</h3>
-                                <span class="vessel-type-badge">Large</span>
-                            </div>
-                            <div class="vessel-specs">
-                                <div class="spec">
-                                    <span class="spec-label">Cargo Capacity:</span>
-                                    <span class="spec-value">65,000 tonnes</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Draft:</span>
-                                    <span class="spec-value">11.8 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">LOA (Length):</span>
-                                    <span class="spec-value">229 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Beam (Width):</span>
-                                    <span class="spec-value">32 m</span>
-                                </div>
-                            </div>
-                            <p class="vessel-desc">Popular option for major bulk cargo routes.</p>
-                        </div>
-
-                        <!-- Capesize -->
-                        <div class="vessel-card">
-                            <div class="vessel-header">
-                                <h3>Capesize</h3>
-                                <span class="vessel-type-badge">XL</span>
-                            </div>
-                            <div class="vessel-specs">
-                                <div class="spec">
-                                    <span class="spec-label">Cargo Capacity:</span>
-                                    <span class="spec-value">170,000 tonnes</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Draft:</span>
-                                    <span class="spec-value">15.5 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">LOA (Length):</span>
-                                    <span class="spec-value">290 m</span>
-                                </div>
-                                <div class="spec">
-                                    <span class="spec-label">Beam (Width):</span>
-                                    <span class="spec-value">45 m</span>
-                                </div>
-                            </div>
-                            <p class="vessel-desc">Mega-vessels for major ocean-going routes. Restricted access to smaller ports.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Vessel Specifications Table -->
-                <section class="vessel-specifications">
-                    <div class="section-title">
-                        <h2>Detailed Vessel Specifications</h2>
-                    </div>
-
-                    <div class="table-wrapper">
-                        <table class="spec-table">
-                            <thead>
-                                <tr>
-                                    <th>Vessel Type</th>
-                                    <th>Capacity (tonnes)</th>
-                                    <th>Draft (m)</th>
-                                    <th>LOA (m)</th>
-                                    <th>Beam (m)</th>
-                                    <th>Age Range (years)</th>
-                                    <th>Fuel Consumption (tonnes/day)</th>
-                                    <th>Day Rate Range (USD)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Handysize</strong></td>
-                                    <td>35,000</td>
-                                    <td>9.2</td>
-                                    <td>190</td>
-                                    <td>28</td>
-                                    <td>8-12</td>
-                                    <td>4.5-5.5</td>
-                                    <td>18,000 - 22,000</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Supramax</strong></td>
-                                    <td>52,000</td>
-                                    <td>10.5</td>
-                                    <td>210</td>
-                                    <td>30</td>
-                                    <td>7-10</td>
-                                    <td>6.0-7.0</td>
-                                    <td>20,000 - 24,000</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Panamax</strong></td>
-                                    <td>65,000</td>
-                                    <td>11.8</td>
-                                    <td>229</td>
-                                    <td>32</td>
-                                    <td>6-9</td>
-                                    <td>7.5-8.5</td>
-                                    <td>22,000 - 28,000</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Capesize</strong></td>
-                                    <td>170,000</td>
-                                    <td>15.5</td>
-                                    <td>290</td>
-                                    <td>45</td>
-                                    <td>5-8</td>
-                                    <td>12.0-14.0</td>
-                                    <td>30,000 - 38,000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="table-note"><em>Sample data for demonstration. Actual specifications vary by vessel class and age.</em></p>
-                </section>
-
-            </div>
-
-            <!-- Data Disclaimer -->
-            <footer class="data-disclaimer">
-                <p>⚠️ <em>Vessel specifications are sample data for prototype demonstration.</em></p>
-            </footer>
-        </main>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vessels | SIH26006</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="simple-page">
+      <a class="brand" href="dashboard.html"
+        ><span class="brand-mark">↗</span><span>SIH<span>26006</span></span></a
+      ><a href="dashboard.html" class="back">← Dashboard</a>
+      <main class="content-wrap">
+        <p class="eyebrow">PROTOTYPE DEMO DATA</p>
+        <h1>Vessel comparison</h1>
+        <p class="page-intro">
+          Suitability for Australia → Paradip · Coal · 70,000 tonnes.
+        </p>
+        <div class="table-panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Vessel</th>
+                <th>Sample capacity</th>
+                <th>Draft</th>
+                <th>LOA</th>
+                <th>Port check</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Handysize</td>
+                <td>35,000 t</td>
+                <td>10.5 m</td>
+                <td>180 m</td>
+                <td>Capacity shortfall</td>
+                <td><span class="status not-suitable">NOT SUITABLE</span></td>
+              </tr>
+              <tr>
+                <td>Supramax</td>
+                <td>58,000 t</td>
+                <td>12.8 m</td>
+                <td>200 m</td>
+                <td>Two-lift consideration</td>
+                <td><span class="status warning-status">WARNING</span></td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Panamax <b>Recommended</b></td>
+                <td>75,000 t</td>
+                <td>13.2 m</td>
+                <td>225 m</td>
+                <td>Capacity and dimensions pass</td>
+                <td><span class="status suitable">SUITABLE</span></td>
+              </tr>
+              <tr>
+                <td>Capesize</td>
+                <td>170,000 t</td>
+                <td>18.0 m</td>
+                <td>289 m</td>
+                <td>Draft limitation</td>
+                <td><span class="status not-suitable">NOT SUITABLE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="disclaimer">
+          All vessel characteristics shown are sample data for prototype
+          demonstration, not official specifications.
+        </p>
+      </main>
     </div>
-
-    <script src="js/api.js"></script>
-    <script src="js/vessels.js"></script>
-</body>
+  </body>
 </html>

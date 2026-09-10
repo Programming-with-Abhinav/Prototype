@@ -1,228 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forecast - SIH26006</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>SIH26006</h2>
-                <p class="platform-name">Freight Intelligence</p>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-link" data-icon="📊">
-                    <span>Dashboard</span>
-                </a>
-                <a href="forecast.html" class="nav-link active" data-icon="📈">
-                    <span>Forecast</span>
-                </a>
-                <a href="vessels.html" class="nav-link" data-icon="🚢">
-                    <span>Vessels</span>
-                </a>
-                <a href="ports.html" class="nav-link" data-icon="⛴️">
-                    <span>Ports</span>
-                </a>
-                <a href="recommendations.html" class="nav-link" data-icon="💡">
-                    <span>Recommendations</span>
-                </a>
-                <a href="alerts.html" class="nav-link" data-icon="⚠️">
-                    <span>Alerts</span>
-                </a>
-                <a href="analytics.html" class="nav-link" data-icon="📉">
-                    <span>Analytics</span>
-                </a>
-                <a href="about.html" class="nav-link" data-icon="ℹ️">
-                    <span>About</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <button class="btn-logout" onclick="logout()">Logout</button>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Header -->
-            <header class="top-header">
-                <div class="header-left">
-                    <h1>Freight Rate Forecasting</h1>
-                    <p class="header-subtitle">Enter cargo details to generate forecast</p>
-                </div>
-            </header>
-
-            <!-- Forecast Content -->
-            <div class="dashboard-content">
-
-                <!-- Forecast Form -->
-                <section class="form-section">
-                    <div class="section-title">
-                        <h2>Forecast Parameters</h2>
-                    </div>
-                    <form class="forecast-form" id="forecastForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="origin">Origin Port</label>
-                                <select id="origin" name="origin" required>
-                                    <option value="">Select origin</option>
-                                    <option value="Australia">Australia</option>
-                                    <option value="USA">USA</option>
-                                    <option value="Mozambique">Mozambique</option>
-                                    <option value="Russia">Russia</option>
-                                    <option value="Indonesia">Indonesia</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="destination">Destination Port</label>
-                                <select id="destination" name="destination" required>
-                                    <option value="">Select destination</option>
-                                    <option value="Paradip">Paradip</option>
-                                    <option value="Visakhapatnam">Visakhapatnam</option>
-                                    <option value="Gangavaram">Gangavaram</option>
-                                    <option value="Gopalpur">Gopalpur</option>
-                                    <option value="Dhamra">Dhamra</option>
-                                    <option value="Haldia">Haldia</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cargoType">Cargo Type</label>
-                                <select id="cargoType" name="cargoType" required>
-                                    <option value="">Select cargo</option>
-                                    <option value="Coal">Coal</option>
-                                    <option value="Iron Ore">Iron Ore</option>
-                                    <option value="Grain">Grain</option>
-                                    <option value="Container">Container</option>
-                                    <option value="Breakbulk">Breakbulk</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="quantity">Cargo Quantity (tonnes)</label>
-                                <input type="number" id="quantity" name="quantity" placeholder="e.g., 70000" required min="1000">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="vesselType">Preferred Vessel Type</label>
-                                <select id="vesselType" name="vesselType" required>
-                                    <option value="">Select vessel</option>
-                                    <option value="Handysize">Handysize</option>
-                                    <option value="Supramax">Supramax</option>
-                                    <option value="Panamax">Panamax</option>
-                                    <option value="Capesize">Capesize</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="contractDuration">Contract Duration</label>
-                                <select id="contractDuration" name="contractDuration" required>
-                                    <option value="">Select duration</option>
-                                    <option value="1 Month">1 Month</option>
-                                    <option value="3 Months">3 Months</option>
-                                    <option value="6 Months">6 Months</option>
-                                    <option value="12 Months">12 Months</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="forecastPeriod">Forecast Period (days)</label>
-                                <select id="forecastPeriod" name="forecastPeriod" required>
-                                    <option value="7">7 Days</option>
-                                    <option value="14">14 Days</option>
-                                    <option value="30" selected>30 Days</option>
-                                    <option value="60">60 Days</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary">Generate Forecast</button>
-                            <button type="reset" class="btn-secondary">Clear Form</button>
-                        </div>
-                    </form>
-                </section>
-
-                <!-- Forecast Results (Hidden by default) -->
-                <section class="forecast-results" id="forecastResults" style="display: none;">
-                    <div class="section-title">
-                        <h2>Forecast Results</h2>
-                    </div>
-
-                    <div class="results-summary">
-                        <div class="result-card result-card-primary">
-                            <h4>Current Freight Rate</h4>
-                            <div class="result-value" id="resultCurrent">₹ 85,450</div>
-                        </div>
-
-                        <div class="result-card result-card-success">
-                            <h4>Forecasted Rate (End Period)</h4>
-                            <div class="result-value" id="resultForecast">₹ 88,920</div>
-                        </div>
-
-                        <div class="result-card result-card-info">
-                            <h4>Trend</h4>
-                            <div class="result-value" id="resultTrend">Increasing</div>
-                        </div>
-
-                        <div class="result-card result-card-warning">
-                            <h4>Market Risk</h4>
-                            <div class="result-value" id="resultRisk">Medium</div>
-                        </div>
-                    </div>
-
-                    <div class="charts-row">
-                        <div class="chart-container">
-                            <div class="chart-title">
-                                <h3>Forecast Trend</h3>
-                            </div>
-                            <canvas id="forecastDetailChart"></canvas>
-                        </div>
-
-                        <div class="chart-container">
-                            <div class="chart-title">
-                                <h3>Risk Assessment</h3>
-                            </div>
-                            <canvas id="riskAssessmentChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-box">
-                        <h4>Forecast Recommendation</h4>
-                        <p id="resultRecommendation">
-                            Evaluate entering a short-term charter during the favorable forecast window.
-                        </p>
-                    </div>
-
-                    <div class="form-actions">
-                        <button class="btn-primary" onclick="goToRecommendations()">View Recommendations</button>
-                        <button class="btn-secondary" onclick="generateNewForecast()">Generate New Forecast</button>
-                    </div>
-                </section>
-
-            </div>
-
-            <!-- Data Disclaimer -->
-            <footer class="data-disclaimer">
-                <p>⚠️ <em>Prototype uses sample/demo data for demonstration. Production deployment requires validated historical freight data.</em></p>
-            </footer>
-        </main>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forecast | SIH26006</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="simple-page">
+      <a class="brand" href="dashboard.html"
+        ><span class="brand-mark">↗</span><span>SIH<span>26006</span></span></a
+      ><a href="dashboard.html" class="back">← Dashboard</a>
+      <main class="form-wrap">
+        <p class="eyebrow">CREATE A PROTOTYPE FORECAST</p>
+        <h1>Plan your cargo movement.</h1>
+        <p>
+          Enter the route and cargo details. Results use clearly labelled local
+          demo data.
+        </p>
+        <form id="forecastForm" class="forecast-form">
+          <label
+            >Origin<select name="origin" required>
+              <option>Australia</option>
+              <option>USA</option>
+              <option>Mozambique</option>
+              <option>Indonesia</option>
+            </select></label
+          ><label
+            >Destination<select name="destination" required>
+              <option>Paradip</option>
+              <option>Visakhapatnam</option>
+              <option>Gangavaram</option>
+              <option>Haldia</option>
+            </select></label
+          ><label
+            >Cargo type<select name="cargoType" required>
+              <option>Coal</option>
+              <option>Iron ore</option>
+              <option>Fertilizer</option>
+            </select></label
+          ><label
+            >Cargo quantity (tonnes)<input
+              type="number"
+              name="quantityTonnes"
+              value="70000"
+              min="1"
+              required /></label
+          ><label
+            >Preferred vessel<select name="preferredVessel" required>
+              <option>Panamax</option>
+              <option>Supramax</option>
+              <option>Handysize</option>
+              <option>Capesize</option>
+            </select></label
+          ><label
+            >Contract duration<select name="contractMonths" required>
+              <option value="3">3 Months</option>
+              <option value="1">1 Month</option>
+              <option value="6">6 Months</option>
+            </select></label
+          ><button class="button primary" type="submit">
+            Generate forecast →
+          </button>
+        </form>
+        <section id="forecastResult" class="forecast-result" hidden>
+          <span class="status suitable">DEMO FORECAST</span>
+          <h2>₹ 27,150 expected freight rate</h2>
+          <p>
+            Moderate increase expected over the next 3 months. Suggested action:
+            evaluate market entry in the next 2–3 weeks.
+          </p>
+        </section>
+      </main>
     </div>
-
     <script src="js/api.js"></script>
     <script src="js/forecast.js"></script>
-</body>
+  </body>
 </html>

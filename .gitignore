@@ -1,0 +1,11 @@
+# Java and Maven build output
+backend/target/
+
+# A locally bundled JDK must not be application source or committed build input.
+backend/src/main/java/in/sih26006/freight/service/oracleJdk-26/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.log
+.DS_Store
