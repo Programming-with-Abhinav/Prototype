@@ -11,3 +11,8 @@ backend/src/main/java/in/sih26006/freight/service/oracleJdk-26/
 .DS_Store
 backend/oracleJdk-26/
 backend/oracleJdk-26/
+
+# Local Maven toolchain and dependency cache used for backend verification.
+.m2/
+.tools/
+apache-maven-*-bin.zip

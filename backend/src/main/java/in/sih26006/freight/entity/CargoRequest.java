@@ -1,7 +1,6 @@
 package in.sih26006.freight.entity;
 
 import jakarta.persistence.*;
-import java.time.Instant;
 
 @Entity
 @Table(name = "cargo_requests", indexes = @Index(name = "idx_cargo_created", columnList = "createdAt"))
@@ -19,7 +18,7 @@ public class CargoRequest {
     private double quantityTonnes;
     private String preferredVessel;
     private int contractMonths;
-    private Instant createdAt = Instant.now();
+    // private Instant createdAt = Instant.now();
 
     public CargoRequest() {
     }

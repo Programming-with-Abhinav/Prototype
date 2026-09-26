@@ -1,527 +1,195 @@
-# PROJECT STATUS & ROADMAP
-## SIH26006 - Intelligent Freight Forecasting & Vessel Chartering
+# SIH26006 Freight Intelligence - Consolidated Project Status
 
-**Generated:** 2026-09-07  
-**Version:** Phase 2 Complete
+**Last reviewed:** 2026-09-12  
+**Current target:** Stage 3 - Spring Boot Backend  
+**Document status:** This is the single source of project documentation. It replaces the previous README, database guide, phase design, technical prototype guide, fix guide, and project roadmap Markdown files.
 
----
+## 1. Project Purpose
 
-## 📊 Overall Project Status
+SIH26006 is a decision-support prototype for freight forecasting, vessel chartering, bulk-cargo procurement, port compatibility, risk assessment, and recommendations for overseas cargo bound for the East Coast of India.
 
-```
-PHASE 1: Frontend UI                    ✅ COMPLETE
-PHASE 2: Database Design                ✅ COMPLETE
-PHASE 3: Spring Boot Backend            ⏳ PLANNED
-PHASE 4-6: API & Integration            ⏳ PLANNED
-PHASE 7-11: Optimization Engines        ⏳ PLANNED
-PHASE 12-17: Testing & Deployment       ⏳ PLANNED
+The system does not make the final chartering decision. It explains inputs, constraints, risks, and ranked options to support a human decision-maker.
 
-Completion: 25% (2 of 8 major phases)
-```
+All current freight, vessel, port, forecast, and risk values are prototype or demo/synthetic data unless a future data-source integration explicitly identifies them as validated real data. The current forecast formula is explainable baseline logic, not a trained or independently validated ML model.
 
----
+## 2. Current Technology Stack
 
-## ✅ PHASE 1: Frontend UI - COMPLETE
+| Area | Current technology | Status |
+| --- | --- | --- |
+| Frontend | HTML5, CSS3, vanilla JavaScript, Chart.js | Complete prototype UI |
+| Backend | Java 17 target, Spring Boot 3.4.3, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress |
+| Database | MySQL 8 target; H2 fallback for local prototype startup | MySQL integration pending |
+| Persistence | Hibernate / JPA | Partial prototype mappings only |
+| Forecasting / ML | Python is planned for a later service | Not started by design |
+| Build | Maven | Local Maven 3.9.9 used for verification |
 
-### Files Created: 36 Files
+## 3. Current Repository Structure
 
-**HTML Pages (9 files):**
-- ✅ index.html (Login page with demo access)
-- ✅ dashboard.html (Main command center with analytics)
-- ✅ forecast.html (Freight rate forecasting form & results)
-- ✅ vessels.html (Vessel type specifications)
-- ✅ ports.html (Port infrastructure data)
-- ✅ recommendations.html (Chartering recommendations)
-- ✅ alerts.html (Market & operational alerts)
-- ✅ analytics.html (Performance metrics & trends)
-- ✅ about.html (Project information & disclaimer)
-
-**CSS Files (3 files):**
-- ✅ style.css (Main styling - 500+ lines)
-- ✅ dashboard.css (Dashboard components - 1000+ lines)
-- ✅ responsive.css (Mobile responsive - 400+ lines)
-
-**JavaScript Files (8 files):**
-- ✅ api.js (API utilities, demo data, helper functions)
-- ✅ dashboard.js (Dashboard charts & logic)
-- ✅ forecast.js (Forecast form & Chart.js integration)
-- ✅ vessels.js (Vessels page logic)
-- ✅ ports.js (Ports page logic)
-- ✅ recommendations.js (Recommendations logic)
-- ✅ analytics.js (Analytics charts - 4 charts)
-- ✅ alerts.js (Alerts page logic)
-
-**Documentation:**
-- ✅ README.md (Complete project documentation)
-
-### Features Implemented:
-- ✅ Professional enterprise-grade UI
-- ✅ Responsive design (desktop, tablet, mobile)
-- ✅ 8 interactive Chart.js charts
-- ✅ Demo data with realistic scenarios
-- ✅ Login authentication system
-- ✅ Multi-page navigation
-- ✅ Form validation
-- ✅ Risk analysis visualization
-- ✅ Vessel compatibility checking
-- ✅ Alert system (5 alert types)
-- ✅ Data disclaimers on every page
-
----
-
-## ✅ PHASE 2: Database Design - COMPLETE
-
-### Files Created: 7 Files
-
-**Database Documentation:**
-- ✅ PHASE_2_DATABASE_DESIGN.md (Comprehensive design doc - 600+ lines)
-  - Complete schema specification
-  - All 12 tables documented
-  - Relationships explained
-  - Sample data included
-  - Query examples
-  - Security considerations
-
-**SQL Scripts (5 files):**
-- ✅ 01_create_database.sql (Database creation)
-- ✅ 02_create_tables.sql (12 tables with foreign keys & indexes)
-- ✅ 03_load_sample_data.sql (Sample data for all tables)
-- ✅ 04_create_users.sql (Database user setup with roles)
-- ✅ 05_useful_queries.sql (Reference queries for Phase 3)
-
-**Implementation Guide:**
-- ✅ database/README.md (Setup instructions & troubleshooting)
-
-### Database Tables (12 Total):
-1. ✅ users (Authentication & profiles)
-2. ✅ vessels (Vessel specifications)
-3. ✅ ports (Port infrastructure)
-4. ✅ origins (Cargo origin locations)
-5. ✅ cargo_types (Cargo classifications)
-6. ✅ freight_history (Historical freight rates)
-7. ✅ forecasts (Forecast records)
-8. ✅ vessel_compatibility (Compatibility checks)
-9. ✅ risk_assessments (Risk analysis records)
-10. ✅ recommendations (Chartering recommendations)
-11. ✅ alerts (System alerts & notifications)
-12. ✅ audit_log (System audit trail)
-
-### Database Features:
-- ✅ Normalized schema with relationships
-- ✅ Foreign key constraints
-- ✅ Appropriate indexes for performance
-- ✅ Sample data for 18 freight routes
-- ✅ User roles (admin, manager, operator, viewer)
-- ✅ Audit trail for compliance
-- ✅ JSON fields for flexible data
-- ✅ Timestamps for tracking
-
----
-
-## ⏳ PHASE 3: Spring Boot Backend - PLANNED
-
-**Estimated Duration:** 5-7 days
-
-### Planned Tasks:
-
-1. **Project Setup**
-   - [ ] Create Spring Boot project
-   - [ ] Add Maven dependencies
-   - [ ] Configure application.properties
-   - [ ] Set up project structure
-
-2. **Entity Mapping**
-   - [ ] Create JPA entities for all 12 tables
-   - [ ] Define relationships (@OneToMany, @ManyToOne, etc.)
-   - [ ] Add validation annotations
-   - [ ] Create DTOs for API responses
-
-3. **Repository Interfaces**
-   - [ ] Create Spring Data JPA repositories
-   - [ ] Define custom query methods
-   - [ ] Implement pagination & sorting
-   - [ ] Add search & filter queries
-
-4. **Service Layer**
-   - [ ] UserService (authentication, profile)
-   - [ ] ForecastService (forecast generation)
-   - [ ] VesselService (vessel data)
-   - [ ] PortService (port data)
-   - [ ] RecommendationService (chartering logic)
-   - [ ] RiskService (risk assessment)
-   - [ ] AlertService (notification system)
-
-5. **Controller/API Layer**
-   - [ ] AuthController (login, register)
-   - [ ] ForecastController (REST endpoints)
-   - [ ] VesselController
-   - [ ] PortController
-   - [ ] RecommendationController
-   - [ ] AlertController
-   - [ ] ReportController
-
-6. **Security**
-   - [ ] JWT token implementation
-   - [ ] Password encryption (BCrypt)
-   - [ ] Role-based access control
-   - [ ] CORS configuration
-   - [ ] Input validation
-
-7. **Testing**
-   - [ ] Unit tests for services
-   - [ ] Integration tests for APIs
-   - [ ] Database connection tests
-   - [ ] Security tests
-
----
-
-## ⏳ PHASE 4-6: API Integration & Frontend Connection - PLANNED
-
-**Estimated Duration:** 5-7 days
-
-### Tasks:
-- [ ] Connect frontend forms to REST APIs
-- [ ] Implement API response handling
-- [ ] Add loading states & error handling
-- [ ] Implement real data flow
-- [ ] Remove demo data from frontend
-- [ ] Add pagination & filtering UI
-- [ ] Implement real authentication
-- [ ] Add export functionality
-
----
-
-## ⏳ PHASE 7-11: Optimization Engines - PLANNED
-
-**Estimated Duration:** 7-10 days
-
-### Forecast Engine:
-- [ ] Moving average algorithm
-- [ ] Linear regression model
-- [ ] Time series analysis
-- [ ] Confidence scoring
-- [ ] Trend detection
-
-### Vessel Compatibility Engine:
-- [ ] Draft compatibility checks
-- [ ] Length compatibility checks
-- [ ] Width compatibility checks
-- [ ] Capacity sufficiency checks
-- [ ] Compatibility scoring
-
-### Port Compatibility Engine:
-- [ ] Maximum draft verification
-- [ ] LOA (length) verification
-- [ ] Beam (width) verification
-- [ ] Cargo capacity verification
-- [ ] Congestion consideration
-
-### Risk Assessment Engine:
-- [ ] Freight volatility scoring
-- [ ] Port congestion scoring
-- [ ] Demand uncertainty scoring
-- [ ] Overall risk calculation
-- [ ] Risk level classification
-
-### Recommendation Engine:
-- [ ] Vessel selection algorithm
-- [ ] Route optimization
-- [ ] Cost estimation
-- [ ] Timing recommendations
-- [ ] Strategy generation
-
----
-
-## ⏳ PHASE 12-17: Testing & Deployment - PLANNED
-
-**Estimated Duration:** 7-10 days
-
-### Testing:
-- [ ] Comprehensive unit testing
-- [ ] Integration testing
-- [ ] End-to-end testing
-- [ ] Performance testing
-- [ ] Security testing
-- [ ] Load testing
-
-### Documentation:
-- [ ] API documentation (Swagger/OpenAPI)
-- [ ] User guide
-- [ ] Administrator guide
-- [ ] Developer guide
-- [ ] Architecture documentation
-
-### Deployment:
-- [ ] Production database setup
-- [ ] Server configuration
-- [ ] SSL/TLS setup
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
-- [ ] Monitoring setup
-
-### Polish:
-- [ ] UI/UX refinement
-- [ ] Performance optimization
-- [ ] Security hardening
-- [ ] Bug fixes
-- [ ] Final testing
-
----
-
-## 📁 Project Structure
-
-```
-SIH26006/
-├── frontend/                          ✅ Phase 1 Complete
-│   ├── *.html (9 files)
-│   ├── css/ (3 files)
-│   ├── js/ (8 files)
-│   └── README.md
-│
-├── database/                          ✅ Phase 2 Complete
-│   ├── *.sql (5 SQL scripts)
-│   ├── PHASE_2_DATABASE_DESIGN.md
-│   └── README.md
-│
-├── backend/                           ⏳ Phase 3 Planned
-│   ├── src/
-│   │   ├── main/java/com/sih26006/
-│   │   │   ├── controller/
-│   │   │   ├── service/
-│   │   │   ├── repository/
-│   │   │   ├── entity/
-│   │   │   └── config/
-│   │   └── test/
-│   ├── pom.xml
-│   └── README.md
-│
-├── README.md                          ✅ Project Overview
-├── PROJECT_STATUS.md                  📄 This File
-├── PHASE_2_DATABASE_DESIGN.md         ✅ Database Design Doc
-└── ROADMAP.md                         📋 Long-term vision
+```text
+frontend/       Stage 1 user interface
+database/       Stage 2 SQL scripts and sample data
+backend/        Stage 3 Spring Boot application
+docker-compose.yml
+PROJECT_STATUS.md
 ```
 
----
+The active, compiled backend package is `in.sih26006.freight`. A separate `com.sih26006` Java tree remains in the repository as legacy reference material, but Maven excludes it from compilation because it targets an incompatible JPA/Spring generation.
 
-## 🎯 Key Achievements
+## 4. Phase Status
 
-### Phase 1 Achievements:
-- ✅ Created 36 frontend files
-- ✅ Implemented 9 fully functional pages
-- ✅ Built 8 interactive charts with Chart.js
-- ✅ Designed professional enterprise UI
-- ✅ Made responsive for all devices
-- ✅ Created demo data system
-- ✅ Implemented demo scenarios
-- ✅ Added alert system (10 sample alerts)
-- ✅ Created comprehensive documentation
+| Stage | Scope | Status | Evidence / notes |
+| --- | --- | --- | --- |
+| 1 | Frontend UI | Complete | Nine user-facing HTML pages, responsive CSS, Chart.js visualizations, client-side demo flows, and demo-data notices exist. |
+| 2 | Database design | Design complete; database instance unverified | Numbered SQL scripts define the intended 12-table MySQL schema and sample data. No successful live MySQL setup/connection is recorded. |
+| 3A | Spring Boot skeleton | Complete | Spring Boot application builds, starts, and exposes `GET /api/health`. |
+| 3B | MySQL connection and JPA verification | Pending | Requires one canonical schema and an environment-based MySQL connection. |
+| 3C | All entities and relationships | Pending | Only three prototype entities are active; the intended 12-table schema is not yet mapped safely. |
+| 3D | Repositories and DTOs | Partial / pending | Prototype has three repositories and forecast DTOs; the documented MVP boundary is incomplete. |
+| 3E | Services and validation | Partial / pending | Prototype has decision and weather services. Domain services and central exceptions are missing. |
+| 3F | REST API | Partial / pending | Prototype endpoints work locally, but documented API coverage and consistent API error contracts are incomplete. |
+| 3G | Authentication and security | Pending | JWT, BCrypt, RBAC, restrictive CORS, and security tests are not implemented. |
+| 3H | Tests, API documentation, completion audit | Pending | No automated test classes or OpenAPI/Swagger configuration exists. |
+| 4 | Frontend-to-backend integration | Partial / not current target | The Forecast form calls the local prototype API. Other frontend areas still use demo data. |
+| 5 | Compatibility and risk engines | Pending | Current prototype behavior is not the documented, complete explainable engine. |
+| 6 | Measured freight baseline | Pending | No time-series validation or MAE/RMSE evidence exists. |
+| 7 | Python ML service | Not started intentionally | Build Java + MySQL reliability before introducing an ML service. |
+| 8-11 | Recommendation orchestration, production hardening, deployment, final QA | Pending | Do not start before the earlier backend work is verified. |
 
-### Phase 2 Achievements:
-- ✅ Designed 12-table normalized database
-- ✅ Created all foreign key relationships
-- ✅ Implemented proper indexing strategy
-- ✅ Created 5 SQL scripts for setup
-- ✅ Generated 600+ lines of documentation
-- ✅ Included sample data (100+ records)
-- ✅ Set up user roles & permissions
-- ✅ Created query reference library
-- ✅ Provided troubleshooting guide
+## 5. Completed Work
 
----
+### Stage 1 - Frontend
 
-## 📈 Statistics
+- Login, dashboard, forecast, vessels, ports, recommendations, alerts, analytics, and about pages exist.
+- The UI is responsive and includes Chart.js visualizations.
+- The forecast page sends its request to `http://localhost:8080/api/forecast` and displays an API failure instead of inventing a result when the backend is unavailable.
+- Existing frontend design and files should not be redesigned or replaced during Stage 3 without an explicit request.
 
-| Metric | Count |
-|--------|-------|
-| Total Files Created | 43 |
-| HTML Pages | 9 |
-| CSS Files | 3 |
-| JavaScript Files | 8 |
-| SQL Scripts | 5 |
-| Documentation Files | 8 |
-| Lines of Code (Frontend) | 3,500+ |
-| Lines of Code (CSS) | 1,900+ |
-| Lines of Documentation | 1,500+ |
-| Database Tables | 12 |
-| Sample Data Records | 100+ |
-| API Endpoints (Planned) | 50+ |
+### Stage 2 - Database Design
 
----
+The documented target schema is `sih26006_freight_intelligence` and contains these 12 tables:
 
-## 🚀 Ready for Next Phases
+1. `users`
+2. `vessels`
+3. `ports`
+4. `origins`
+5. `cargo_types`
+6. `freight_history`
+7. `forecasts`
+8. `vessel_compatibility`
+9. `risk_assessments`
+10. `recommendations`
+11. `alerts`
+12. `audit_log`
 
-### To Start Phase 3:
+The numbered scripts provide database creation, table definitions, sample data, database users, and useful reference queries. The planned schema includes foreign keys, indexes, timestamps, audit records, user roles, and sample records. Sample data must remain labelled as demo/synthetic data.
 
-1. **Set up Phase 2 Database:**
-   ```bash
-   cd database/
-   mysql -u root -p < 01_create_database.sql
-   mysql -u root -p < 02_create_tables.sql
-   mysql -u root -p < 03_load_sample_data.sql
-   mysql -u root -p < 04_create_users.sql
-   ```
+### Stage 3A - Backend Skeleton
 
-2. **Verify Database:**
-   ```bash
-   mysql -u freight_app -p sih26006_freight_intelligence
-   # Check: SELECT * FROM users;
-   ```
+- `backend/pom.xml` declares Spring Web, Spring Data JPA, MySQL Connector/J, H2, Validation, and Spring Boot Test.
+- The application target is Java 17 and Spring Boot 3.4.3.
+- `FreightApplication` is the application entry point.
+- Maven compiles only the active `in.sih26006.freight` tree. The old `com.sih26006` tree is excluded because it uses `javax.persistence` and Lombok without a compatible dependency/configuration setup.
+- Verification completed on 2026-09-12:
+  - `mvn test` completed with `BUILD SUCCESS`.
+  - No automated test classes currently exist, so Maven executed zero tests.
+  - The application started with its local H2 fallback.
+  - `GET /api/health` returned `{"mode":"prototype","status":"UP"}`.
 
-3. **Create Spring Boot Project:**
-   ```bash
-   mvn archetype:generate -DgroupId=com.sih26006 -DartifactId=freight-intelligence-api -DarchetypeArtifactId=maven-archetype-quickstart
-   ```
+## 6. Existing Backend Components
 
-4. **Add Dependencies:**
-   - spring-boot-starter-web
-   - spring-boot-starter-data-jpa
-   - mysql-connector-java
-   - lombok
-   - springdoc-openapi (Swagger)
+### Active prototype components
 
----
+| Component | Current state |
+| --- | --- |
+| Entities | `Port`, `Vessel`, `CargoRequest` |
+| Repositories | Port, vessel, and cargo-request JPA repositories |
+| DTOs | Forecast request and response DTOs |
+| Services | Deterministic decision service and cached weather service |
+| Controller | One `ApiController` |
+| Demo initializer | Seeds prototype ports and vessels when the local database is empty |
 
-## 💡 Highlights
+### Existing prototype endpoints
 
-### What Works Now:
-- ✅ **Full Frontend UI** - All pages functional with demo data
-- ✅ **Database Schema** - Complete 12-table design with relationships
-- ✅ **Sample Data** - Realistic demo data for testing
-- ✅ **Documentation** - Comprehensive guides for all phases
-- ✅ **User Interface** - Professional enterprise-grade design
-- ✅ **Responsive Design** - Works on desktop, tablet, mobile
+| Method | Endpoint | Current purpose |
+| --- | --- | --- |
+| GET | `/api/health` | Health response |
+| GET | `/api/ports` | Prototype port data |
+| GET | `/api/vessels` | Prototype vessel data |
+| GET | `/api/cargo?page=0&size=20` | Paginated prototype cargo requests |
+| POST | `/api/forecast` | Saves a prototype cargo input and returns deterministic forecast/recommendation data |
+| GET | `/api/weather/{port}` | Cached weather lookup for configured prototype ports |
 
-### What's Coming:
-- ⏳ **Java Spring Boot Backend** - REST APIs for all operations
-- ⏳ **Real Database Integration** - Connect frontend to backend
-- ⏳ **Advanced ML Models** - Improved forecasting algorithms
-- ⏳ **Real-time Data** - Freight market, port, vessel feeds
-- ⏳ **Production Deployment** - Cloud hosting & scaling
-- ⏳ **Mobile Apps** - iOS/Android native apps
+These endpoints are not yet the final documented API contract. They must not be presented as real-time freight, AIS, or validated market data.
 
----
+## 7. Current Problems and Inconsistencies
 
-## 🎓 Learning Value
+### 7.1 Two incompatible database schemas
 
-This project demonstrates:
-- ✅ Full-stack web development
-- ✅ Database design & normalization
-- ✅ RESTful API architecture
-- ✅ Modern web UI/UX
-- ✅ Responsive web design
-- ✅ Data visualization
-- ✅ Security best practices
-- ✅ Logistics domain knowledge
-- ✅ Software engineering principles
-- ✅ Agile development methodology
+This is the most important outstanding issue.
 
----
+- The numbered Stage 2 scripts define `sih26006_freight_intelligence` with 12 tables. This is the documented database target for Stage 3.
+- `database/schema.sql`, `database/sample_data.sql`, and `docker-compose.yml` define a different database named `sih26006` with seven tables: `users`, `ports`, `vessels`, `cargo_requests`, `forecasts`, `recommendations`, and `risk_alerts`.
+- The active three-entity backend matches the smaller Docker/H2 prototype more closely than the documented 12-table schema.
 
-## 🔮 Future Enhancements
+The documented 12-table schema is the canonical target for future Stage 3 work. Do not alter it casually. Stage 3B and 3C must adapt the backend to it rather than silently creating a third schema.
 
-### Short-term (Phase 3-6):
-- Real-time freight market data integration
-- Live port congestion tracking
-- Vessel AIS position tracking
-- Weather API integration
+### 7.2 Duplicate Java implementations
 
-### Medium-term (Phase 7-11):
-- Machine Learning models (Python integration)
-- LSTM neural networks for forecasting
-- Ensemble methods for better accuracy
-- Anomaly detection
+- `in.sih26006.freight` is active Spring Boot 3/Jakarta code.
+- `com.sih26006` is legacy partial entity/repository code using `javax.persistence` and Lombok.
+- The legacy source is intentionally excluded from Maven compilation. It has not been deleted, rewritten, or treated as a reliable entity mapping.
 
-### Long-term (Phase 12-17):
-- Global port coverage
-- International trade routes
-- Mobile native apps
-- Cloud deployment (AWS/GCP/Azure)
-- Integration with ERP systems
-- API marketplace for third-party integrations
+### 7.3 Runtime configuration is not currently tracked in the backend resources directory
 
----
+`backend/src/main/resources/application.properties` is currently deleted from its tracked location, while an untracked `application.properties` exists at the repository root. Spring Boot does not load that root file when it runs from `backend`, so the successful Stage 3A runtime check used Spring Boot's embedded H2 defaults.
 
-## 📊 Metrics
+Before Stage 3B, establish an intentionally tracked, environment-variable-based backend configuration without hard-coding credentials.
 
-### Code Quality:
-- Comments & documentation: Excellent
-- Code structure: Well-organized
-- Error handling: Comprehensive
-- Security: Best practices followed
-- Performance: Optimized for scale
+### 7.4 Security and production gaps
 
-### Frontend:
-- Accessibility: WCAG compliant
-- Browser compatibility: All modern browsers
-- Mobile responsiveness: Fully responsive
-- Load time: Optimized
-- User experience: Professional
+- Current controller CORS permits all origins; restrictive CORS belongs in Stage 3G.
+- There is no authentication, password hashing, JWT, RBAC, rate limiting, secrets management, audit implementation, or authorization testing.
+- There is no global exception handler, consistent error-response format, OpenAPI/Swagger configuration, or automated backend test suite.
+- Docker Compose contains development credentials. They must never be reused in production.
+- Live vessel AIS data is not implemented and requires a licensed provider and credentials.
+- Weather data is an optional external prototype lookup, not a market-data source.
 
-### Database:
-- Normalization: Third normal form (3NF)
-- Relationships: Proper foreign keys
-- Indexes: Strategic placement
-- Performance: Query optimized
-- Scalability: Ready for growth
+## 8. Development Rules
 
----
+1. Keep changes small and verifiable: inspect first, implement one requested task, build/test, then report results.
+2. Preserve the existing frontend and the documented 12-table database contract unless a requested task explicitly changes them.
+3. Use the architecture `controller -> service -> repository -> entity`.
+4. Keep DTOs at API boundaries; do not expose JPA entities directly from final REST endpoints.
+5. Validate all external input and keep controllers thin.
+6. Do not invent database columns, APIs, market data, accuracy claims, or ML features.
+7. Use Java/Spring Boot/MySQL for the core application. Use Python only later for separately deployed ML training/inference.
+8. Never commit production passwords, API keys, JWT secrets, or private keys.
+9. Clearly label demo/synthetic values and keep recommendations explainable.
+10. Do not claim that the system makes autonomous chartering decisions.
 
-## ✨ Next Steps
+## 9. Exact Next Implementation Task
 
-### Immediate (Next Week):
-1. Test Phase 1 frontend thoroughly
-2. Review database design with team
-3. Plan Phase 3 timeline
-4. Prepare development environment
+Implement **Stage 3B only**.
 
-### Short-term (2-3 Weeks):
-1. Begin Phase 3 Spring Boot development
-2. Create entity classes
-3. Build repository layer
-4. Start REST API endpoints
+1. Restore a tracked backend configuration file under `backend/src/main/resources/` using environment variables for database URL, username, and password.
+2. Configure a safe local development option and a MySQL option for the canonical `sih26006_freight_intelligence` database.
+3. Do not alter any table, SQL script, frontend file, or Docker schema in this task.
+4. Verify the application connects to MySQL and can query one existing canonical table.
+5. Add a focused connection/integration test if the available environment can run MySQL.
+6. Run the Maven build/tests and report the exact database verification result.
 
-### Medium-term (1 Month):
-1. Complete backend APIs
-2. Integrate with frontend
-3. Begin Phase 7 engine development
-4. Implement real data feeds
+After Stage 3B, implement Stage 3C: map all 12 documented tables and relationships safely with Jakarta JPA, validation, and DTO separation. Do not implement forecasting, recommendations, authentication, or Python ML as part of either task.
 
----
+## 10. Controlled Demo Scenario
 
-## 📞 Support & Resources
+Use this scenario for future end-to-end testing after the underlying stages are complete:
 
-- **Frontend Issues:** Check `frontend/README.md`
-- **Database Issues:** Check `database/README.md`
-- **General Questions:** Check `README.md`
-- **Architecture:** Check project structure above
+- Origin: Australia
+- Destination: Paradip
+- Cargo: Coal
+- Quantity: 70,000 tonnes
+- Contract duration: 3 months
 
----
+Expected flow: input validation -> route/cargo lookup -> freight history -> explainable forecast -> vessel and port compatibility -> risk factors -> ranked decision-support recommendation -> dashboard display.
 
-## 🎉 Summary
-
-### Phase 1 & 2 Status: ✅ COMPLETE & TESTED
-
-You now have:
-- ✅ **Working Frontend Application** - Ready for demonstration
-- ✅ **Complete Database Design** - Ready for implementation
-- ✅ **Comprehensive Documentation** - For all phases
-- ✅ **Sample Data** - For testing & demo
-- ✅ **Clear Roadmap** - For future development
-
-**Total Effort:** ~2 weeks  
-**Code Files:** 36 files  
-**Documentation:** 8 comprehensive guides  
-**Ready for:** Phase 3 Backend Development
-
----
-
-**Project Status:** 25% Complete (Phases 1 & 2 Done)  
-**Next Phase:** Spring Boot Backend Development  
-**Timeline:** On Schedule  
-**Quality:** High
-
----
-
-*SIH26006 - Intelligent Freight Forecasting & Vessel Chartering*  
-*Smart India Hackathon 2026*  
-*Generated: 2026-09-07*
+Every number in the controlled scenario remains demo/synthetic until its source and validation evidence are recorded.
