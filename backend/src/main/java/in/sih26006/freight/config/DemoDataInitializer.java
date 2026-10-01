@@ -23,8 +23,8 @@ public class DemoDataInitializer {
             if (vessels.count() == 0) {
                 vessels.save(new Vessel("Handysize", 35000, 10.5, 180, 28));
                 vessels.save(new Vessel("Supramax", 58000, 12.8, 200, 32));
-                vessels.save(new Vessel("Panamax", 75000, 13.2, 225, 32.3));
-                vessels.save(new Vessel("Capesize", 170000, 18, 289, 45));
+                vessels.save(new Vessel("Panamax", 75000, 13.2, 225, 32));
+                vessels.save(new Vessel("Capesize", 170000, 18.0, 289, 45));
             }
         };
     }
