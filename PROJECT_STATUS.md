@@ -21,7 +21,7 @@ All current freight, vessel, port, forecast, and risk values are prototype or de
 | Area | Current technology | Status |
 | --- | --- | --- |
 | Frontend | HTML5, CSS3, vanilla JavaScript, Chart.js | Complete prototype UI (9 pages) |
-| Backend | Java 21 / Java 17 target, Spring Boot 3.4.3, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress |
+| Backend | Java 25, Spring Boot 3.5.16, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress |
 | Database | MySQL 8 target (`sih26006_freight_intelligence`); H2 in MySQL mode fallback | Stage 3B complete (dual-profile verified) |
 | Persistence | Jakarta Persistence (JPA) / Hibernate 6.x | 3 prototype entities active; 12-table mapping target (Stage 3C) |
 | Forecasting / ML | Deterministic baseline; Python ML planned for later service | Stage 5 / Stage 7 target |
@@ -34,7 +34,7 @@ All current freight, vessel, port, forecast, and risk values are prototype or de
 ```text
 frontend/             Stage 1 user interface (9 HTML pages, CSS, JS, Chart.js)
 database/             Stage 2 SQL scripts (01-05 canonical scripts and schemas)
-backend/              Stage 3 Spring Boot 3.4.3 application
+backend/              Stage 3 Spring Boot 3.5.16 application on Java 25
   pom.xml
   src/main/resources/
     application.properties          Tracked default profile (H2 in MySQL mode for canonical schema)
@@ -57,7 +57,7 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 | --- | --- | --- | --- |
 | 1 | Frontend UI | Complete | Nine user-facing HTML pages, responsive CSS, Chart.js visualizations, client-side demo flows, and demo-data notices. |
 | 2 | Database design | Design complete | Numbered SQL scripts (01 to 05) define the canonical 12-table `sih26006_freight_intelligence` MySQL schema and sample data. |
-| 3A | Spring Boot skeleton | Complete | Application compiles and runs with Spring Boot 3.4.3 on Java 21/17. `GET /api/health` operational. |
+| 3A | Spring Boot skeleton | Complete | Application compiles and runs with Spring Boot 3.5.16 on Java 25. `GET /api/health` operational. |
 | 3B | Configuration & DB connection | Complete | Tracked `application.properties` and `application-mysql.properties` established. Environment variables supported. `DatabaseConnectionTest` and `MySqlConnectionIntegrationTest` verified with `mvn test` passing (7 tests run, 0 failures, 1 gracefully skipped when local port 3306 is offline). |
 | 3C | All 12 entities and repositories | CURRENT TARGET | Map all 12 canonical tables into `in.sih26006.freight.entity` using Jakarta JPA (`jakarta.persistence.*`) and create corresponding repositories. |
 | 3D | Repositories and DTOs | Pending | Complete DTO boundaries for all entities to prevent exposing JPA entities directly. |
@@ -96,7 +96,7 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 - Additional scripts provide sample data (`03_load_sample_data.sql`), user permissions (`04_create_users.sql`), and reference queries (`05_useful_queries.sql`).
 
 ### Stage 3A - Backend Skeleton
-- Spring Boot 3.4.3 initialized with Maven pom configuring Spring Web, Spring Data JPA, MySQL Connector/J, H2, Validation, and Spring Boot Test.
+- Spring Boot 3.5.16 and Java 25 configured in Maven with Spring Web, Spring Data JPA, MySQL Connector/J, H2, Validation, and Spring Boot Test.
 - `in.sih26006.freight.FreightApplication` is the primary entry point.
 
 ### Stage 3B - Configuration & Verification
