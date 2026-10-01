@@ -53,7 +53,7 @@ public class RiskAssessment {
     @Column(name = "risk_level", length = 50)
     private String riskLevel;
 
-    @Column(name = "risk_factors_json", columnDefinition = "TEXT")
+    @Column(name = "risk_factors_json", columnDefinition = "JSON")
     private String riskFactorsJson;
 
     @Column(name = "recommendations", columnDefinition = "TEXT")

@@ -33,10 +33,10 @@ public class AuditLog {
     @Column(name = "record_id")
     private Integer recordId;
 
-    @Column(name = "old_values", columnDefinition = "TEXT")
+    @Column(name = "old_values", columnDefinition = "JSON")
     private String oldValues;
 
-    @Column(name = "new_values", columnDefinition = "TEXT")
+    @Column(name = "new_values", columnDefinition = "JSON")
     private String newValues;
 
     @Column(name = "ip_address", length = 45)

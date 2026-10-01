@@ -47,13 +47,6 @@ public class Port {
     @Column(name = "is_operational")
     private Boolean isOperational = true;
 
-    // Stored for weather-service geo lookups; not part of canonical schema table definition
-    @Column(name = "latitude")
-    private Double latitude;
-
-    @Column(name = "longitude")
-    private Double longitude;
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -64,18 +57,16 @@ public class Port {
     }
 
     /**
-     * Legacy constructor used by DemoDataInitializer.
-     * congestionStatus string is converted to percentage (Low=10, Moderate=50, High=80).
+     * Convenience constructor for synthetic port seed data.
+     * congestionStatus is converted to a percentage (Low=10, Moderate=50, High=80).
      */
     public Port(String portName, double maxDraftMeters, double maxLoaMeters, double maxBeamMeters,
-                String congestionStatus, double latitude, double longitude) {
+                String congestionStatus) {
         this.portName = portName;
         this.maxDraftMeters = BigDecimal.valueOf(maxDraftMeters);
         this.maxLoaMeters = (int) maxLoaMeters;
         this.maxBeamMeters = (int) maxBeamMeters;
         this.currentCongestionPercentage = parseCongestion(congestionStatus);
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
     private static int parseCongestion(String status) {
@@ -118,10 +109,6 @@ public class Port {
     public void setCurrentCongestionPercentage(Integer currentCongestionPercentage) { this.currentCongestionPercentage = currentCongestionPercentage; }
     public Boolean getIsOperational() { return isOperational; }
     public void setIsOperational(Boolean isOperational) { this.isOperational = isOperational; }
-    public Double getLatitude() { return latitude; }
-    public void setLatitude(Double latitude) { this.latitude = latitude; }
-    public Double getLongitude() { return longitude; }
-    public void setLongitude(Double longitude) { this.longitude = longitude; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
 

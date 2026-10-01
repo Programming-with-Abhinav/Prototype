@@ -1,7 +1,9 @@
 # SIH26006 Freight Intelligence - Consolidated Project Status
 
-**Last reviewed:** 2026-10-01  
-**Current target:** Stage 3D - Repositories, DTOs & Service Layer  
+**Last reviewed:** 2026-10-01
+
+**Current target:** Close Stage 3C - Canonical entity/repository alignment and verification
+
 **Document status:** This is the single source of project documentation. It replaces the previous README, database guide, phase design, technical prototype guide, fix guide, and project roadmap Markdown files. It also serves as the operational Guidebook for IDE agents and developers.
 
 ---
@@ -21,9 +23,9 @@ All current freight, vessel, port, forecast, and risk values are prototype or de
 | Area | Current technology | Status |
 | --- | --- | --- |
 | Frontend | HTML5, CSS3, vanilla JavaScript, Chart.js | Complete prototype UI (9 pages) |
-| Backend | Java 25, Spring Boot 3.5.16, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress |
+| Backend | POM targets Java 25; Spring Boot 3.5.16, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress; local runtime currently reports Microsoft JDK 21.0.12, so the toolchain must be aligned before verification. |
 | Database | MySQL 8 target (`sih26006_freight_intelligence`); H2 in MySQL mode fallback | Stage 3B complete (dual-profile verified) |
-| Persistence | Jakarta Persistence (JPA) / Hibernate 6.x | 3 prototype entities active; 12-table mapping target (Stage 3C) |
+| Persistence | Jakarta Persistence (JPA) / Hibernate 6.x | Source includes entities for all 12 canonical tables plus the prototype `CargoRequest`; schema alignment and verification remain open (Stage 3C). |
 | Forecasting / ML | Deterministic baseline; Python ML planned for later service | Stage 5 / Stage 7 target |
 | Build Tool | Apache Maven 3.9.9 (bundled under `.tools/apache-maven-3.9.9/`) | Operational & verified |
 
@@ -40,7 +42,7 @@ backend/              Stage 3 Spring Boot 3.5.16 application on Java 25
     application.properties          Tracked default profile (H2 in MySQL mode for canonical schema)
     application-mysql.properties    Tracked MySQL profile for sih26006_freight_intelligence
   src/main/java/
-    in/sih26006/freight/            Active, compiled Spring Boot 3 / Jakarta JPA package
+    in/sih26006/freight/          Active Spring Boot 3 / Jakarta JPA package; canonical entities and repositories present
     com/sih26006/                   Legacy reference models (excluded from Maven compilation)
   src/test/java/
     in/sih26006/freight/            Unit and integration tests
@@ -57,10 +59,10 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 | --- | --- | --- | --- |
 | 1 | Frontend UI | Complete | Nine user-facing HTML pages, responsive CSS, Chart.js visualizations, client-side demo flows, and demo-data notices. |
 | 2 | Database design | Design complete | Numbered SQL scripts (01 to 05) define the canonical 12-table `sih26006_freight_intelligence` MySQL schema and sample data. |
-| 3A | Spring Boot skeleton | Complete | Application compiles and runs with Spring Boot 3.5.16 on Java 25. `GET /api/health` operational. |
+| 3A | Spring Boot skeleton | Complete (prior verification recorded) | Spring Boot 3.5.16 configured; `GET /api/health` was previously verified operational. Current POM target is Java 25; the current shell runtime is Java 21. |
 | 3B | Configuration & DB connection | Complete | Tracked `application.properties` and `application-mysql.properties` established. Environment variables supported. `DatabaseConnectionTest` and `MySqlConnectionIntegrationTest` verified with `mvn test` passing (7 tests run, 0 failures, 1 gracefully skipped when local port 3306 is offline). |
-| 3C | All 12 entities and repositories | CURRENT TARGET | Map all 12 canonical tables into `in.sih26006.freight.entity` using Jakarta JPA (`jakarta.persistence.*`) and create corresponding repositories. |
-| 3D | Repositories and DTOs | Pending | Complete DTO boundaries for all entities to prevent exposing JPA entities directly. |
+| 3C | All 12 entities and repositories | IMPLEMENTED IN SOURCE; VERIFICATION PENDING | Twelve canonical entity classes and twelve canonical repositories are present. Review mappings against SQL, align the demo initializer, resolve the JDK mismatch, and verify the Spring context/build before marking complete. |
+| 3D | DTO boundaries | Pending | Add DTOs for API operations and map entities to DTOs; only forecast request/response DTOs currently exist. |
 | 3E | Services and validation | Pending | Domain services, input validation, and centralized exception handling (`@RestControllerAdvice`). |
 | 3F | REST API contracts | Pending | Standardize endpoints, pagination, and consistent API error contracts across all modules. |
 | 3G | Authentication and security | Pending | JWT, BCrypt, RBAC, restrictive CORS, and security tests. |
@@ -72,7 +74,7 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 
 ---
 
-## 5. Completed Work
+## 5. Completed Work & Current Implementation Snapshot
 
 ### Stage 1 - Frontend
 - 9 user-facing HTML pages: `index.html`, `dashboard.html`, `forecast.html`, `vessels.html`, `ports.html`, `recommendations.html`, `alerts.html`, `analytics.html`, `about.html`.
@@ -110,6 +112,13 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
   - `DatabaseConnectionTest`: verifies DataSource injection, metadata, `SELECT 1`, and port repository connectivity.
   - `MySqlConnectionIntegrationTest`: gracefully skips live MySQL query when port 3306 is not bound, verifying canonical naming configuration.
 
+### Stage 3C - Canonical Entities & Repositories (implementation present, acceptance pending)
+- Active package `in.sih26006.freight.entity` contains classes for all 12 canonical tables, and `in.sih26006.freight.repository` contains the matching 12 Spring Data repositories.
+- The prototype `CargoRequest` entity/repository remains alongside the canonical model.
+- `DemoDataInitializer` currently seeds only prototype ports and vessels; it does not seed canonical origins or cargo types.
+- The excluded legacy `com.sih26006` entity/repository tree is still present.
+- Stage 3C has not been marked complete because a final schema-alignment review, initializer decision, and successful build/context verification are not recorded.
+
 ---
 
 ## 6. Existing Backend Components
@@ -117,9 +126,9 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 ### Active prototype components (`in.sih26006.freight`)
 | Component | Files | Description |
 | --- | --- | --- |
-| Entities | `Port`, `Vessel`, `CargoRequest` | Jakarta JPA entity models for initial prototype |
-| Repositories | `PortRepository`, `VesselRepository`, `CargoRequestRepository` | Spring Data JPA interfaces |
-| DTOs | `ForecastRequest`, `ForecastResponse` | Request and response contracts for forecast API |
+| Entities | 12 canonical table entities plus `CargoRequest` | Jakarta JPA source models are present; schema/build verification pending |
+| Repositories | 12 canonical repositories plus `CargoRequestRepository` | Spring Data JPA interfaces are present; context registration not verified for current source state |
+| DTOs | `ForecastRequest`, `ForecastResponse` | Forecast request/response contracts only; broader DTO boundary is pending |
 | Services | `DecisionService`, `WeatherService` | Deterministic baseline logic and in-memory cached weather provider |
 | Controller | `ApiController` | Exposes health, ports, vessels, cargo, forecast, and weather endpoints |
 | Initializer | `DemoDataInitializer` | Automatically seeds demo ports and vessels if empty |
@@ -135,7 +144,7 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 ### 7.2 Duplicate Java Trees
 - Active code: `in.sih26006.freight.*` (Spring Boot 3, `jakarta.persistence.*`).
 - Legacy reference: `com.sih26006.*` (Spring Boot 2 / `javax.persistence.*` with Lombok, excluded in `pom.xml`).
-- *Resolution in Stage 3C:* Migrate the entity definitions into `in.sih26006.freight.entity` using standard Java (avoiding Lombok compilation issues) and Jakarta annotations, then retire the legacy directory.
+- Canonical entity definitions now exist in `in.sih26006.freight.entity`; the legacy tree remains in the repository and excluded from Maven compilation. Remove or archive it only after the active model is reviewed and verified.
 
 ### 7.3 Runtime Configuration (RESOLVED in Stage 3B)
 - `backend/src/main/resources/application.properties` and `application-mysql.properties` are tracked in git and support environment overrides.
@@ -154,17 +163,16 @@ PROJECT_STATUS.md           Master project status and IDE Agent Guidebook
 
 ---
 
-## 9. Exact Next Implementation Task: Stage 3C
+## 9. Exact Next Implementation Task: Close Stage 3C
 
-**Target:** Create all 12 JPA Entities and Repositories in `in.sih26006.freight`.
+**Target:** Complete acceptance of the canonical entity and repository implementation already present in `in.sih26006.freight`.
 
-1. Map the 12 canonical tables defined in `database/02_create_tables.sql` into `in.sih26006.freight.entity`:
-   - `User`, `Vessel`, `Port`, `Origin`, `CargoType`, `FreightHistory`, `Forecast`, `VesselCompatibility`, `RiskAssessment`, `Recommendation`, `Alert`, `AuditLog`.
-2. Use `jakarta.persistence.*` annotations with exact table and column names matching `02_create_tables.sql`.
-3. Configure proper relationships (`@ManyToOne`, `@JoinColumn`) with `FetchType.LAZY`.
-4. Create the 12 corresponding Spring Data JPA repositories in `in.sih26006.freight.repository`.
-5. Update `DemoDataInitializer` to support the new entity models cleanly.
-6. Verify compilation and tests with `mvn test`.
+1. Review all 12 active entity mappings against `database/02_create_tables.sql`, including nullability, timestamps, enum/JSON columns, relationships, and generated identifiers.
+2. Confirm all 12 repositories are discovered and their method names resolve against the active entity fields.
+3. Decide whether to adapt `DemoDataInitializer` to seed canonical `Origin`, `Port`, `Vessel`, and `CargoType` records, while keeping demo values clearly synthetic.
+4. Resolve the toolchain mismatch: `backend/pom.xml` targets Java 25, while the current `java` and bundled Maven runtime report Microsoft JDK 21.0.12.
+5. After the toolchain is aligned, run the documented Maven verification and record its actual result here.
+6. Retire or archive `com.sih26006` only after confirming the active package covers the required model and no references depend on the legacy tree.
 
 ---
 
@@ -188,7 +196,7 @@ This section is an explicit execution manual designed for **Open IDE Agents** (a
 
 When executing shell commands on this machine:
 - **OS:** Windows 11 (PowerShell)
-- **Java:** Microsoft JDK 21 is installed and available in the system PATH.
+- **Java:** Current shell reports Microsoft OpenJDK 21.0.12. `backend/pom.xml` declares Java 25, so align the runtime or project target before relying on Maven build results.
 - **Maven:** Use the bundled Apache Maven binary at:
   ```powershell
   # From project root:
@@ -213,9 +221,9 @@ When executing shell commands on this machine:
 
 ---
 
-### 11.2 Stage 3C: Detailed Entity & Repository Blueprint
+### 11.2 Stage 3C: Entity & Repository Acceptance Checklist
 
-Every entity must be in package `in.sih26006.freight.entity`, use `jakarta.persistence.*`, include standard Java getters/setters and constructors, and match `database/02_create_tables.sql`.
+The 12 entity source files and repositories already exist in the active packages. Use the canonical SQL below as the acceptance reference; do not treat file presence alone as proof that the mappings have been verified.
 
 #### Entity 1: `User` (`users`)
 - Table: `users`
@@ -391,14 +399,14 @@ Every entity must be in package `in.sih26006.freight.entity`, use `jakarta.persi
 
 ---
 
-### 11.3 Repositories Specification
+### 11.3 Repository Inventory and Expected Queries
 
-All 12 repositories must reside in `in.sih26006.freight.repository` and extend `JpaRepository<EntityClass, Integer>`:
+All 12 canonical repositories are present in `in.sih26006.freight.repository` and extend `JpaRepository<EntityClass, Integer>`. The current source exposes these query methods (some use case-insensitive variants of the original target):
 1. `UserRepository` (`findByUsername`, `findByEmail`, `existsByUsername`)
-2. `VesselRepository` (`findByVesselType`, `findByIsActiveTrue`)
-3. `PortRepository` (`findByPortName`, `findByCountry`)
-4. `OriginRepository` (`findByOriginName`, `findByIsActiveTrue`)
-5. `CargoTypeRepository` (`findByCargoName`)
+2. `VesselRepository` (`findByVesselTypeIgnoreCase`, `findByIsActiveTrue`)
+3. `PortRepository` (`findByPortNameIgnoreCase`, `findByCountry`, `findByIsOperationalTrue`; also a JPQL `findByNameIgnoreCase` alias)
+4. `OriginRepository` (`findByOriginNameIgnoreCase`, `findByIsActiveTrue`)
+5. `CargoTypeRepository` (`findByCargoNameIgnoreCase`)
 6. `FreightHistoryRepository` (`findByOriginAndDestinationPortOrderByRecordedDateDesc`)
 7. `ForecastRepository` (`findByUserOrderByForecastDateDesc`)
 8. `VesselCompatibilityRepository` (`findByOriginAndDestinationPortAndVessel`)
@@ -409,34 +417,34 @@ All 12 repositories must reside in `in.sih26006.freight.repository` and extend `
 
 ---
 
-### 11.4 Step-by-Step Implementation Sequence for Agent
+### 11.4 Stage 3C Completion Sequence
 
 ```mermaid
 flowchart TD
-    S3C1["1. Map 12 Entities in in.sih26006.freight.entity"] --> S3C2["2. Create 12 JPA Repositories in in.sih26006.freight.repository"]
-    S3C2 --> S3C3["3. Update DemoDataInitializer for canonical data seeding"]
-    S3C3 --> S3C4["4. Retire or remove legacy com.sih26006 directory"]
-    S3C4 --> S3C5["5. Compile & Run Tests: & ..\\.tools\\apache-maven-3.9.9\\bin\\mvn.cmd test"]
-    S3C5 --> S3D["6. Proceed to Stage 3D: DTOs & Service Layer"]
+    S3C1["1. Align Java runtime with pom.xml target"] --> S3C2["2. Review 12 mappings against canonical SQL"]
+    S3C2 --> S3C3["3. Confirm repositories and initializer behavior"]
+    S3C3 --> S3C4["4. Run Maven build and context verification"]
+    S3C4 --> S3D["5. Mark 3C complete; begin Stage 3D DTO boundaries"]
 ```
 
-1. **Step 1:** Write the 12 Entity classes in `backend/src/main/java/in/sih26006/freight/entity/`.
-2. **Step 2:** Write the 12 Repository interfaces in `backend/src/main/java/in/sih26006/freight/repository/`.
-3. **Step 3:** Update `DemoDataInitializer` to populate canonical demo records for Origins, Ports, Vessels, and Cargo Types so startup remains self-contained.
-4. **Step 4:** Safely clean up the excluded `com.sih26006` directory once new entities are in place.
-5. **Step 5:** Run test verification using:
+1. **Step 1:** Align the Java runtime and `pom.xml` target.
+2. **Step 2:** Compare the 12 active entity mappings with `database/02_create_tables.sql` and correct any drift.
+3. **Step 3:** Confirm whether canonical demo data seeding is required; if so, seed Origins, Ports, Vessels, and Cargo Types using explicit demo values.
+4. **Step 4:** Decide whether the excluded `com.sih26006` tree can be retired after checking references.
+5. **Step 5:** Run verification using:
    ```powershell
    & ..\.tools\apache-maven-3.9.9\bin\mvn.cmd test
    ```
-6. **Step 6:** Confirm `BUILD SUCCESS` and update Phase Status in this document to mark Stage 3C complete.
+6. **Step 6:** Record the actual result and mark Stage 3C complete only after build, context, and mapping checks pass.
 
 ---
 
 ### 11.5 Agent Verification & Acceptance Criteria
 
-Before declaring Stage 3C complete, the agent must verify:
+Before declaring Stage 3C complete, record the results for:
+- [ ] Java runtime matches the Java target declared in `backend/pom.xml`.
 - [ ] Maven build succeeds with `mvn clean test-compile test`.
-- [ ] Zero compile errors in `in.sih26006.freight`.
-- [ ] Spring context loads successfully with all 12 repositories registered.
-- [ ] Existing `ApiControllerTest` and `DatabaseConnectionTest` continue to pass.
-- [ ] No regression on H2 local development mode or MySQL profile.
+- [ ] Spring context loads successfully with all 12 canonical repositories registered.
+- [ ] Entity mappings align with `database/02_create_tables.sql` on H2 and MySQL-compatible types.
+- [ ] Existing `ApiControllerTest` and `DatabaseConnectionTest` pass; live MySQL test outcome is recorded according to local availability.
+- [ ] Demo initialization supports the chosen canonical seed-data approach.
