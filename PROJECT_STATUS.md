@@ -1,7 +1,7 @@
 # SIH26006 Freight Intelligence - Consolidated Project Status
 
-**Last reviewed:** 2026-09-12  
-**Current target:** Stage 3 - Spring Boot Backend  
+**Last reviewed:** 2026-10-01  
+**Current target:** Stage 3 - Spring Boot Backend (Stage 3C next)  
 **Document status:** This is the single source of project documentation. It replaces the previous README, database guide, phase design, technical prototype guide, fix guide, and project roadmap Markdown files.
 
 ## 1. Project Purpose
@@ -18,7 +18,7 @@ All current freight, vessel, port, forecast, and risk values are prototype or de
 | --- | --- | --- |
 | Frontend | HTML5, CSS3, vanilla JavaScript, Chart.js | Complete prototype UI |
 | Backend | Java 17 target, Spring Boot 3.4.3, Spring Web, Spring Data JPA, Bean Validation | Stage 3 in progress |
-| Database | MySQL 8 target; H2 fallback for local prototype startup | MySQL integration pending |
+| Database | MySQL 8 target; H2 fallback for local prototype startup | Verified configuration & connectivity tests in place; 12-table entity mapping next |
 | Persistence | Hibernate / JPA | Partial prototype mappings only |
 | Forecasting / ML | Python is planned for a later service | Not started by design |
 | Build | Maven | Local Maven 3.9.9 used for verification |
@@ -42,13 +42,13 @@ The active, compiled backend package is `in.sih26006.freight`. A separate `com.s
 | 1 | Frontend UI | Complete | Nine user-facing HTML pages, responsive CSS, Chart.js visualizations, client-side demo flows, and demo-data notices exist. |
 | 2 | Database design | Design complete; database instance unverified | Numbered SQL scripts define the intended 12-table MySQL schema and sample data. No successful live MySQL setup/connection is recorded. |
 | 3A | Spring Boot skeleton | Complete | Spring Boot application builds, starts, and exposes `GET /api/health`. |
-| 3B | MySQL connection and JPA verification | Pending | Requires one canonical schema and an environment-based MySQL connection. |
+| 3B | MySQL connection and JPA verification | Complete | Tracked backend configuration restored under `src/main/resources/` with environment-variable support (`DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`). Canonical database target `sih26006_freight_intelligence` configured with safe local fallback (H2 in MySQL mode) and MySQL profile (`application-mysql.properties`). Automated test suite verifies connectivity (7 run, 0 failures, 1 skipped when external MySQL daemon is not running). |
 | 3C | All entities and relationships | Pending | Only three prototype entities are active; the intended 12-table schema is not yet mapped safely. |
 | 3D | Repositories and DTOs | Partial / pending | Prototype has three repositories and forecast DTOs; the documented MVP boundary is incomplete. |
 | 3E | Services and validation | Partial / pending | Prototype has decision and weather services. Domain services and central exceptions are missing. |
 | 3F | REST API | Partial / pending | Prototype endpoints work locally, but documented API coverage and consistent API error contracts are incomplete. |
 | 3G | Authentication and security | Pending | JWT, BCrypt, RBAC, restrictive CORS, and security tests are not implemented. |
-| 3H | Tests, API documentation, completion audit | Pending | No automated test classes or OpenAPI/Swagger configuration exists. |
+| 3H | Tests, API documentation, completion audit | Partial / in progress | Automated backend test suite initiated in Stage 3B (7 test cases: connection, integration, MockMvc tests; 6 passed, 1 skipped for live MySQL). Full API documentation and completion audit pending. |
 | 4 | Frontend-to-backend integration | Partial / not current target | The Forecast form calls the local prototype API. Other frontend areas still use demo data. |
 | 5 | Compatibility and risk engines | Pending | Current prototype behavior is not the documented, complete explainable engine. |
 | 6 | Measured freight baseline | Pending | No time-series validation or MAE/RMSE evidence exists. |
@@ -95,6 +95,20 @@ The numbered scripts provide database creation, table definitions, sample data, 
   - The application started with its local H2 fallback.
   - `GET /api/health` returned `{"mode":"prototype","status":"UP"}`.
 
+### Stage 3B - MySQL Connection and JPA Verification
+
+- Restored tracked configuration under `backend/src/main/resources/application.properties` with environment-variable support (`DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_DRIVER`, `PORT`, `HIBERNATE_DDL_AUTO`).
+- Added canonical MySQL profile `backend/src/main/resources/application-mysql.properties` targeting `sih26006_freight_intelligence` using MySQL Connector/J driver and MySQL dialect.
+- Preserved safe local development option (in-memory H2 in MySQL compatibility mode) targeting canonical database name `sih26006_freight_intelligence`.
+- Created automated test suite under `backend/src/test/java/in/sih26006/freight/`:
+  - `DatabaseConnectionTest`: Validates DataSource connectivity, SQL execution (`SELECT 1`), and `PortRepository` operations.
+  - `MySqlConnectionIntegrationTest`: Checks MySQL host/port reachability, connects and queries canonical tables when a live MySQL instance is available, and safely skips with diagnostic reporting when MySQL is not running on localhost:3306.
+  - `ApiControllerTest`: Verifies `GET /api/health` (`UP`) and `GET /api/ports` via MockMvc.
+- Fixed entity column index alignment in `CargoRequest` (restored `createdAt` field and getter).
+- Verification completed on 2026-10-01:
+  - `mvn test` completed with `BUILD SUCCESS` (7 tests run: 6 passed, 0 failures, 0 errors, 1 skipped for live MySQL daemon check).
+  - MySQL connection configuration verified for both live MySQL environments and safe local H2 fallback.
+
 ## 6. Existing Backend Components
 
 ### Active prototype components
@@ -139,17 +153,15 @@ The documented 12-table schema is the canonical target for future Stage 3 work. 
 - `com.sih26006` is legacy partial entity/repository code using `javax.persistence` and Lombok.
 - The legacy source is intentionally excluded from Maven compilation. It has not been deleted, rewritten, or treated as a reliable entity mapping.
 
-### 7.3 Runtime configuration is not currently tracked in the backend resources directory
+### 7.3 Runtime configuration (Resolved in Stage 3B)
 
-`backend/src/main/resources/application.properties` is currently deleted from its tracked location, while an untracked `application.properties` exists at the repository root. Spring Boot does not load that root file when it runs from `backend`, so the successful Stage 3A runtime check used Spring Boot's embedded H2 defaults.
-
-Before Stage 3B, establish an intentionally tracked, environment-variable-based backend configuration without hard-coding credentials.
+`backend/src/main/resources/application.properties` and `backend/src/main/resources/application-mysql.properties` are now tracked under version control. They provide environment-variable-based configuration (`DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_DRIVER`, `PORT`, `HIBERNATE_DDL_AUTO`), safe local in-memory fallback targeting canonical `sih26006_freight_intelligence`, and a dedicated MySQL profile for live database connections without hardcoded credentials.
 
 ### 7.4 Security and production gaps
 
 - Current controller CORS permits all origins; restrictive CORS belongs in Stage 3G.
 - There is no authentication, password hashing, JWT, RBAC, rate limiting, secrets management, audit implementation, or authorization testing.
-- There is no global exception handler, consistent error-response format, OpenAPI/Swagger configuration, or automated backend test suite.
+- Automated backend test suite was initiated in Stage 3B (`DatabaseConnectionTest`, `MySqlConnectionIntegrationTest`, `ApiControllerTest`). Global exception handler, consistent error-response format, and OpenAPI/Swagger configuration remain pending.
 - Docker Compose contains development credentials. They must never be reused in production.
 - Live vessel AIS data is not implemented and requires a licensed provider and credentials.
 - Weather data is an optional external prototype lookup, not a market-data source.
@@ -169,16 +181,26 @@ Before Stage 3B, establish an intentionally tracked, environment-variable-based 
 
 ## 9. Exact Next Implementation Task
 
-Implement **Stage 3B only**.
+Stage 3B is complete. Implement **Stage 3C only**.
 
-1. Restore a tracked backend configuration file under `backend/src/main/resources/` using environment variables for database URL, username, and password.
-2. Configure a safe local development option and a MySQL option for the canonical `sih26006_freight_intelligence` database.
-3. Do not alter any table, SQL script, frontend file, or Docker schema in this task.
-4. Verify the application connects to MySQL and can query one existing canonical table.
-5. Add a focused connection/integration test if the available environment can run MySQL.
-6. Run the Maven build/tests and report the exact database verification result.
-
-After Stage 3B, implement Stage 3C: map all 12 documented tables and relationships safely with Jakarta JPA, validation, and DTO separation. Do not implement forecasting, recommendations, authentication, or Python ML as part of either task.
+1. Map all 12 documented canonical tables from `database/02_create_tables.sql` into Jakarta JPA entities under `in.sih26006.freight.entity`:
+   - `User` (`users`)
+   - `Vessel` (`vessels`)
+   - `Port` (`ports`)
+   - `Origin` (`origins`)
+   - `CargoType` (`cargo_types`)
+   - `FreightHistory` (`freight_history`)
+   - `Forecast` (`forecasts`)
+   - `VesselCompatibility` (`vessel_compatibility`)
+   - `RiskAssessment` (`risk_assessments`)
+   - `Recommendation` (`recommendations`)
+   - `Alert` (`alerts`)
+   - `AuditLog` (`audit_log`)
+2. Maintain clean separation: Jakarta Persistence (`jakarta.persistence.*`), Bean Validation constraints, appropriate entity relationships/foreign keys, and no Lombok dependency.
+3. Update existing repositories or create corresponding repositories under `in.sih26006.freight.repository`.
+4. Ensure clean DTO separation so entities are not directly leaked through controllers.
+5. Do not alter SQL scripts, frontend files, or Docker schema.
+6. Run Maven test suite to verify compilation, JPA mapping validity, and regression-free test passes.
 
 ## 10. Controlled Demo Scenario
 

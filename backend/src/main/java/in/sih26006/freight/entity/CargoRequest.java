@@ -18,7 +18,7 @@ public class CargoRequest {
     private double quantityTonnes;
     private String preferredVessel;
     private int contractMonths;
-    // private Instant createdAt = Instant.now();
+    private java.time.Instant createdAt = java.time.Instant.now();
 
     public CargoRequest() {
     }
@@ -58,5 +58,9 @@ public class CargoRequest {
 
     public int getContractMonths() {
         return contractMonths;
+    }
+
+    public java.time.Instant getCreatedAt() {
+        return createdAt;
     }
 }
